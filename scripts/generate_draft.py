@@ -50,69 +50,25 @@ RSS_FEEDS = [
 
 HN_KEYWORDS = [
     # AI
-    "ai",
-    "artificial intelligence",
-    "generative ai",
-    "llm",
-    "foundation model",
-    "multimodal",
-    "reasoning model",
-    "gpt",
-    "claude",
-    "gemini",
-    "deepseek",
-    "qwen",
-    "mistral",
-    "llama",
-    "phi",
-
+    "ai", "artificial intelligence", "generative ai", "llm", "foundation model",
+    "multimodal", "reasoning model", "gpt", "claude", "gemini", "deepseek",
+    "qwen", "mistral", "llama", "phi",
     # Agentic AI
-    "agent",
-    "ai agent",
-    "agentic",
-    "workflow",
-    "automation",
-    "copilot",
-    "rag",
-    "vector database",
-    "mcp",
-    "tool calling",
-    "function calling",
-
+    "agent", "ai agent", "agentic", "workflow", "automation", "copilot", "rag",
+    "vector database", "mcp", "tool calling", "function calling",
     # Prompt Engineering
-    "prompt",
-    "prompt engineering",
-    "system prompt",
-    "evaluation",
-    "guardrails",
-
+    "prompt", "prompt engineering", "system prompt", "evaluation", "guardrails",
     # Product
-    "product",
-    "product management",
-    "product owner",
-    "product manager",
-    "roadmap",
-    "customer discovery",
-    "feature",
-    "ux",
-
+    "product", "product management", "product owner", "product manager",
+    "roadmap", "customer discovery", "feature", "ux",
     # Startups
-    "startup",
-    "saas",
-    "founder",
-    "vc",
-    "funding",
-
+    "startup", "saas", "founder", "vc", "funding",
     # Companies
-    "openai",
-    "anthropic",
-    "google ai",
-    "microsoft ai",
-    "meta ai",
-    "nvidia",
+    "openai", "anthropic", "google ai", "microsoft ai", "meta ai", "nvidia",
 ]
-PERSONA = """
-You are an experienced Product Owner specializing in AI-powered products.
+HN_MIN_SCORE = 40  # aşağı upvote-lu, hələ sınanmamış elanları süzgəcdən keçirir - "product" geniş açar söz olduğu üçün bu, ikinci müdafiə xətti kimi qalır
+
+PERSONA = """You are an experienced Product Owner specializing in AI-powered products.
 
 Your audience:
 - Product Owners
@@ -149,7 +105,7 @@ Writing style:
 
 # build.nvidia.com kataloqu dəyişə bilər - hər ehtimala qarşı model adlarını
 # https://build.nvidia.com/models səhifəsində yoxla.
-NVIDIA_TEXT_MODEL = "meta/llama-3.3-70b-instruct"
+NVIDIA_TEXT_MODEL = "nvidia/llama-3.3-nemotron-super-49b-v1.5"
 # NVIDIA-nın hosted kataloqunda şəkil modelləri OpenAI formatı ilə YOX, öz
 # "invoke" formatı ilə çağırılır - bax https://build.nvidia.com/models,
 # modelə klikləyib "Python" tabındaki nümunə koda.
@@ -216,58 +172,76 @@ def collect_articles():
 def choose_and_write(articles):
     """NVIDIA NIM-ə göndərib ən məntiqli xəbəri seçdirir və postu yazdırır.
 
-    Diqqət: model yalnız BURADA verilən (real, çəkilmiş) xəbərlər üzərində
+    Diqqət 1: model yalnız BURADA verilən (real, çəkilmiş) xəbərlər üzərində
     işləyir - "bu gün nə oldu" deyə öz yaddaşından uydurmasının qarşısı
     məhz belə alınır.
+
+    Diqqət 2: JSON YOX, açar-sözlü mətn markerləri istifadə olunur. Uzun,
+    çoxparaqraflı post mətnini JSON string-i için-də istəsək, kiçik modellər
+    tez-tez sətir sonu simvollarını düzgün "escape" etmir və JSON sınır.
+    Marker-based format bu problemi tamamilə aradan qaldırır.
     """
     articles_text = "\n\n".join(
         f"[{i}] {a['title']}\n{a['url']}\n{a['summary']}" for i, a in enumerate(articles)
     )
 
-    prompt = f"""Sən {PERSONA} üçün LinkedIn məzmun strateqisən.
+    prompt = f"""{PERSONA}
+
+VACIB: Yuxarıdakı təlimatlar ingiliscə olsa da, POST_TEXT və REASON Azərbaycan
+dilində yazılmalıdır. Yalnız IMAGE_PROMPT ingiliscə olsun.
 
 Aşağıda son {ARTICLE_LOOKBACK_HOURS} saatın texnologiya xəbərləri var (nömrələnmiş).
 
 SEÇİM MEYARI: Yalnız BİRİNİ seç. Kiçik, tək bir alətin sadə "işə salındı" elanını
 və ya məzmunca kasıb, dərinliyi olmayan xəbərləri SEÇMƏ. Əvəzinə, arxasında real
-substansiya olan (sənaye trendi, tədqiqat, iri şirkət addımı, maliyyələşmə, texniki
-irəliləyiş) və haqqında 150-200 söz maraqlı, konkret fikir yazmaq mümkün olan bir
-xəbər seç - {PERSONA} auditoriyası bunu oxuyub nəsə öyrənməli və ya fikirləşməlidir.
+substansiya olan və yuxarıdaki auditoriya üçün maraqlı, konkret fikir yazmaq
+mümkün olan bir xəbər seç.
 
 Xəbərlər:
 {articles_text}
 
-Yalnız aşağıdakı JSON formatında cavab ver, başqa heç nə yazma (kod bloku, izah və s. olmadan):
-{{
-  "chosen_index": <seçdiyin xəbərin nömrəsi, tam ədəd>,
-  "reason": "<niyə seçdiyini bir cümlə ilə izah et - konkret nə substansiya var>",
-  "post_text": "<Azərbaycan dilində LinkedIn postu, TƏXMİNƏN 150-200 söz olsun (qısa olmasın!),
-                bu quruluşla yaz:
-                (1) İlk sətir - xəbərdəki KONKRET bir fakt, rəqəm və ya detalla başla, ümumi/mücərrəd giriş cümləsi yazma
-                (2) 2-3 cümlə - nə oldu və niyə əhəmiyyətlidir, mənbədən ən azı 1 konkret detal istifadə et
-                (3) 2-3 cümlə - {PERSONA} perspektivindən ŞƏXSİ bir fikir, təcrübə və ya rəy (bu hissə postu generic olmaqdan çıxarır, mütləq daxil et)
-                (4) Oxucuya yönəlmiş açıq, düşündürücü bir sual
-                (5) 3-5 aidiyyəti hashtag
-                Cəmi 2000 simvoldan uzun olmasın>",
-  "image_prompt": "<şəklin İNGİLİSCƏ təsviri: xəbərin KONKRET mövzusuna aid, spesifik bir vizual
-                   metafora təsvir et - mövzu nədən bəhs edirsə, məhz onu (proses, alət, konsepsiya)
-                   flat-design illüstrasiya kimi göstər, ümumi "AI" simvolikası yox.
-                   BUNLARI İSTİFADƏ ETMƏ (həddindən artıq klişedir): robot insanla əl sıxışır,
-                   dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi kürəsi, futuristik hologram.
-                   Professional, minimal, flat-design, real loqo/brend adı olmadan.>"
-}}"""
+Cavabını DƏQİQ aşağıdakı formatda ver - başqa heç nə əlavə etmə, izah yazma,
+markdown qalın (**) işarəsi və kod bloku (```) işarəsi qoyma:
+
+CHOSEN_INDEX: <seçdiyin xəbərin nömrəsi>
+REASON: <niyə seçdiyini bir cümlə ilə izah et, Azərbaycan dilində>
+IMAGE_PROMPT: <şəklin İNGİLİSCƏ təsviri, bir sətirdə: xəbərin KONKRET mövzusuna aid spesifik vizual metafora - mövzu nədən bəhs edirsə məhz onu flat-design illüstrasiya kimi göstər, ümumi "AI" simvolikası yox. BUNLARI İSTİFADƏ ETMƏ: robot insanla əl sıxışır, dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi kürəsi, futuristik hologram. Professional, minimal, real loqo/brend adı olmadan.>
+POST_TEXT_START
+<Azərbaycan dilində LinkedIn postu, yuxarıdaki "Writing style" təlimatlarına (söz sayı, ton, quruluş) tam uyğun>
+POST_TEXT_END"""
 
     response = client.chat.completions.create(
         model=NVIDIA_TEXT_MODEL,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
     )
-
     raw = response.choices[0].message.content.strip()
-    raw = re.sub(r"^```json|^```|```$", "", raw, flags=re.MULTILINE).strip()
-    data = json.loads(raw)
-    data["source"] = articles[int(data["chosen_index"])]
-    return data
+
+    def extract_line(pattern, text, default=""):
+        m = re.search(pattern, text, re.IGNORECASE)
+        return m.group(1).strip() if m else default
+
+    def extract_block(pattern, text, default=""):
+        m = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
+        return m.group(1).strip() if m else default
+
+    chosen_index = int(extract_line(r"CHOSEN_INDEX:\**\s*(\d+)", raw, "0"))
+    reason = extract_line(r"REASON:\**\s*(.+)", raw)
+    image_prompt = extract_line(r"IMAGE_PROMPT:\**\s*(.+)", raw)
+    post_text = extract_block(r"POST_TEXT_START\**\s*(.*?)\s*\**POST_TEXT_END", raw)
+
+    if not post_text:
+        # Model formatı tam izləməyibsə, tam cavabı göstər ki, log-dan görüb
+        # promptu bir də tənzimləyə bilək - kor-koranə davam etmirik.
+        raise ValueError(f"Modelin cavabı gözlənilən formatda deyil:\n{raw[:1500]}")
+
+    return {
+        "chosen_index": chosen_index,
+        "reason": reason,
+        "post_text": post_text,
+        "image_prompt": image_prompt,
+        "source": articles[chosen_index],
+    }
 
 
 def generate_image(image_prompt, out_path):
