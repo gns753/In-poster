@@ -150,6 +150,9 @@ Writing style:
 # build.nvidia.com kataloqu dəyişə bilər - hər ehtimala qarşı model adlarını
 # https://build.nvidia.com/models səhifəsində yoxla.
 NVIDIA_TEXT_MODEL = "meta/llama-3.3-70b-instruct"
+# NVIDIA-nın hosted kataloqunda şəkil modelləri OpenAI formatı ilə YOX, öz
+# "invoke" formatı ilə çağırılır - bax https://build.nvidia.com/models,
+# modelə klikləyib "Python" tabındaki nümunə koda.
 NVIDIA_IMAGE_INVOKE_URL = "https://ai.api.nvidia.com/v1/genai/black-forest-labs/flux.1-dev"
 
 ARTICLE_LOOKBACK_HOURS = 48
@@ -196,6 +199,8 @@ def collect_articles():
                 continue
             if not item or "title" not in item:
                 continue
+            if item.get("score", 0) < HN_MIN_SCORE:
+                continue
             if any(k in item["title"].lower() for k in HN_KEYWORDS):
                 articles.append({
                     "title": item["title"],
@@ -222,8 +227,12 @@ def choose_and_write(articles):
     prompt = f"""Sən {PERSONA} üçün LinkedIn məzmun strateqisən.
 
 Aşağıda son {ARTICLE_LOOKBACK_HOURS} saatın texnologiya xəbərləri var (nömrələnmiş).
-Bunlardan yalnız BİRİNİ seç - {PERSONA} auditoriyası üçün ən "məntiqli",
-peşəkar müzakirəyə açıq olanı.
+
+SEÇİM MEYARI: Yalnız BİRİNİ seç. Kiçik, tək bir alətin sadə "işə salındı" elanını
+və ya məzmunca kasıb, dərinliyi olmayan xəbərləri SEÇMƏ. Əvəzinə, arxasında real
+substansiya olan (sənaye trendi, tədqiqat, iri şirkət addımı, maliyyələşmə, texniki
+irəliləyiş) və haqqında 150-200 söz maraqlı, konkret fikir yazmaq mümkün olan bir
+xəbər seç - {PERSONA} auditoriyası bunu oxuyub nəsə öyrənməli və ya fikirləşməlidir.
 
 Xəbərlər:
 {articles_text}
@@ -231,9 +240,21 @@ Xəbərlər:
 Yalnız aşağıdakı JSON formatında cavab ver, başqa heç nə yazma (kod bloku, izah və s. olmadan):
 {{
   "chosen_index": <seçdiyin xəbərin nömrəsi, tam ədəd>,
-  "reason": "<niyə seçdiyini bir cümlə ilə izah et>",
-  "post_text": "<Azərbaycan dilində LinkedIn postu: ilk sətir diqqətçəkici olsun, qısa paraqraflar, bir əsas fikir, sonda oxucuya sual, sonda 3-5 aidiyyəti hashtag. 1300 simvoldan uzun olmasın>",
-  "image_prompt": "<şəklin İNGİLİSCƏ təsviri: mövzuya uyğun abstrakt/konseptual vizual, real loqo/brend adı olmadan, professional, minimal, flat-design üslubda>"
+  "reason": "<niyə seçdiyini bir cümlə ilə izah et - konkret nə substansiya var>",
+  "post_text": "<Azərbaycan dilində LinkedIn postu, TƏXMİNƏN 150-200 söz olsun (qısa olmasın!),
+                bu quruluşla yaz:
+                (1) İlk sətir - xəbərdəki KONKRET bir fakt, rəqəm və ya detalla başla, ümumi/mücərrəd giriş cümləsi yazma
+                (2) 2-3 cümlə - nə oldu və niyə əhəmiyyətlidir, mənbədən ən azı 1 konkret detal istifadə et
+                (3) 2-3 cümlə - {PERSONA} perspektivindən ŞƏXSİ bir fikir, təcrübə və ya rəy (bu hissə postu generic olmaqdan çıxarır, mütləq daxil et)
+                (4) Oxucuya yönəlmiş açıq, düşündürücü bir sual
+                (5) 3-5 aidiyyəti hashtag
+                Cəmi 2000 simvoldan uzun olmasın>",
+  "image_prompt": "<şəklin İNGİLİSCƏ təsviri: xəbərin KONKRET mövzusuna aid, spesifik bir vizual
+                   metafora təsvir et - mövzu nədən bəhs edirsə, məhz onu (proses, alət, konsepsiya)
+                   flat-design illüstrasiya kimi göstər, ümumi "AI" simvolikası yox.
+                   BUNLARI İSTİFADƏ ETMƏ (həddindən artıq klişedir): robot insanla əl sıxışır,
+                   dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi kürəsi, futuristik hologram.
+                   Professional, minimal, flat-design, real loqo/brend adı olmadan.>"
 }}"""
 
     response = client.chat.completions.create(
