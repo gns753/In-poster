@@ -1,11 +1,11 @@
 {
-  "chosen_index": 29,
-  "reason": "NVIDIA DeepStream 9.1版un fasilələri vizual AI-də agensli AI-yə keçidi və çoxkameralı video analizi üçün yeni imkanlar qopardıq, bu da məhsuldarlıq, Avtonomlijah və infrastruktur mümkünlərinin optimizasiyası üzərində dərin Analiz eyşini açar.",
-  "post_text": "NVIDIA DeepStream 9.1-in yayımlanması vizual AI sənayəsində yeni bir ümumiyyət başaşina edir: agensli AI-yə keçid. Bu aktualizasiya 13 fərdi \"dəhamət\" ilə dəyişikliklər saxlayır — codiqlər (Claude Code və digərləri) naturallanqanj promtlərə əsaslanaraq çoxkameralı video analizi üçün avtomatik pipeline konstruksiyası edə bilər. Multi-View 3D Tracking (MV3DT) modülü isə kamera sənədlərini birliktə 3D worldə daxil edərək obyektləri global ID ilə fərgləndirir. AutoMagicCalib (AMC) isə manuell kamerа calibasiyunu tamamilə dəyişdirir.  \n\nBu, startuplar və korporat məhsuldarlıq komandaları üçün necə fərsat yaradır?  \n- **Infrastruktur Maliyyətlərin Optimizasiyası**: Manuell proseslərin avtomatizasiyası ilə məhdud resurslarla daha çox quruluş saxlamaq mümkündür.  \n- **Yeni Biznes Qeydləri**: Retail (müşteri davranış analizi), security (real-time izləmə), və manufacturing (defekt tərcüməsi) sahələrində qeyd olunan dəyişikliklər.  \n- **Agentli AI-in Təcrübəsi**: Kod generasiyası ilə video analizi arasında sinergiya yaradan məhsullar — example olaraq, anons sistemi avtomatik olaraq aktivitet nöqtələrini tapıb alert göndərə bilər.  \n\nMənə görə, bu, \"AI agents\" konseptinin praktik qapısıdır. Sizə kimin məhsul portfolyosuna bu dəyişiklik daha kəsəblik gətirir?",
-  "image_prompt": "çoxlu kameraların data nöqtələrini 3D həkikət formasında birliktə fərgləndirən minimalist beyin şəkli, göstəriçilər ilə sənədli əlaqə göstərilir.",
+  "chosen_index": 5,
+  "reason": "Çin şirkətlərinin AI sahəsində Amerika liderliyinə təhdid olması barədə məlumat verən xəbər.",
+  "post_text": "Çin şirkətləri AI sahəsində Amerika liderliyinə təhdid təşkil edir. Moonshot və Alibaba kimi şirkətlər OpenAI və Anthropic-in ən yaxşı modelləri ilə rəqabət apara bilən modellər buraxır. Bu, AI-in gələcəyinə və bu sahədəki liderliyə təsir göstərə bilər. \nBu tendensiyanın nəticəsi olaraq, AI sahəsindəki mübarizə daha da şiddətlənəcək və innovasiyalar daha da sürətlənəcək. \nSizcə bu tendensiyanın gələcəyə necə təsir göstərəcək?",
+  "image_prompt": "a grid of small monitor screens showing different camera angles connected by glowing lines to a central dashboard",
   "source": {
-    "title": "NVIDIA Released DeepStream 9.1: Bringing Agentic AI to Vision AI With 13 Skills and Multi-View 3D Tracking",
-    "url": "https://www.marktechpost.com/2026/07/18/nvidia-released-deepstream-9-1-bringing-agentic-ai-to-vision-ai-with-13-skills-and-multi-view-3d-tracking/",
-    "summary": "NVIDIA DeepStream 9.1 introduces 13 agentic skills that let coding agents like Claude Code and Codex build multi-camera video analytics pipelines from natural-language prompts. Multi-View 3D Tracking (MV3DT) fuses per-camera detections into one shared 3D world with a globally consistent object ID, while AutoMagicCalib (AMC) removes manual camera calibration. The release also adds JetPack 7.2 suppo"
+    "title": "China delivers a one-two punch to America’s AI dominance",
+    "url": "https://www.theverge.com/ai-artificial-intelligence/967781/chinese-ai-models-open-source-moonshot-kimi-k3-alibaba-qwen",
+    "summary": "China's leading AI companies are ramping up the pressure on Silicon Valley, as Moonshot and Alibaba unveiled models they claim can go toe-to-toe with the best from OpenAI and Anthropic at a fraction of the cost. The rapid-fire releases suggest America's lead at the AI frontier is increasingly tight, just as the technology is becoming [&#8230;]"
   }
 }
