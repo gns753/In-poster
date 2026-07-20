@@ -1,8 +1,11 @@
 """
 BİR DƏFƏLİK QURULUM SKRİPTİ - bunu GitHub Actions-da yox, öz kompüterində çalışdır.
 
-Məqsəd: LinkedIn-dən refresh_token almaq (bu, ~365 gün etibarlıdır və GitHub
-Actions-ın hər gün sənin adından yeni access_token almasına imkan verir).
+Məqsəd: LinkedIn-dən bir access_token almaq (bu, ~60 gün etibarlıdır). LinkedIn
+adi şəxsi app-lara uzunmüddətli refresh_token vermir (yalnız təsdiqlənmiş
+Marketing Developer Platform partnyorlarına), ona görə hər ~60 gündə bir bu
+skripti yenidən çalışdırıb GitHub-dakı LINKEDIN_ACCESS_TOKEN secret-ini
+yeniləmək lazım olacaq.
 
 İşlətməzdən əvvəl:
   pip install requests
@@ -74,12 +77,16 @@ def main():
     resp.raise_for_status()
     tokens = resp.json()
 
-    print("\n--- Bunları GitHub repo-nda Settings > Secrets and variables > Actions bölməsinə əlavə et ---\n")
-    print(f"LINKEDIN_CLIENT_ID = {client_id}")
-    print(f"LINKEDIN_CLIENT_SECRET = {client_secret}")
-    print(f"LINKEDIN_REFRESH_TOKEN = {tokens.get('refresh_token')}")
-    print("\naccess_token saxlamağa ehtiyac yoxdur - hər workflow işə düşəndə refresh_token-dan təzədən alınır.")
-    print("refresh_token təxminən 365 gün etibarlıdır - bir ildən sonra bu skripti yenidən çalışdırmalı olacaqsan.")
+    print("\n--- Bunu GitHub repo-nda Settings > Secrets and variables > Actions bölməsinə əlavə et ---\n")
+    print(f"LINKEDIN_ACCESS_TOKEN = {tokens.get('access_token')}")
+
+    if tokens.get("refresh_token"):
+        print(f"LINKEDIN_REFRESH_TOKEN = {tokens.get('refresh_token')}  (bonus, adətən gəlmir)")
+
+    days = tokens.get("expires_in", 0) // 86400
+    print(f"\nBu access token təxminən {days} gün sonra bitəcək.")
+    print("Bitəndə bu skripti yenidən çalışdırıb yeni access token alacaqsan və")
+    print("GitHub-dakı LINKEDIN_ACCESS_TOKEN secret-ini yeni dəyərlə yeniləyəcəksən.")
 
 
 if __name__ == "__main__":

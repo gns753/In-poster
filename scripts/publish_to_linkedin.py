@@ -3,9 +3,6 @@ Təsdiqlənmiş draft-ı LinkedIn-ə paylaşır.
 
 Bu skript GitHub Actions tərəfindən, sən bir issue-ya `approved` etiketini
 əlavə etdiyin zaman avtomatik çağırılır (bax: .github/workflows/publish-on-approval.yml).
-Əl ilə də çalışdıra bilərsən, amma ISSUE_TITLE mühit dəyişənini özün verməlisən:
-
-    ISSUE_TITLE="LinkedIn draft - 2026-07-20" python scripts/publish_to_linkedin.py
 """
 
 import json
@@ -15,25 +12,7 @@ import sys
 
 import requests
 
-# LinkedIn Developer Portal-da tələb olunan cari versiyanı (YYYYMM formatında)
-# vaxtaşırı yoxla - LinkedIn bunu zaman-zaman yeniləyir.
 LINKEDIN_VERSION = "202601"
-
-
-def get_access_token():
-    resp = requests.post(
-        "https://www.linkedin.com/oauth/v2/accessToken",
-        headers={"Content-Type": "application/x-www-form-urlencoded"},
-        data={
-            "grant_type": "refresh_token",
-            "refresh_token": os.environ["LINKEDIN_REFRESH_TOKEN"],
-            "client_id": os.environ["LINKEDIN_CLIENT_ID"],
-            "client_secret": os.environ["LINKEDIN_CLIENT_SECRET"],
-        },
-        timeout=15,
-    )
-    resp.raise_for_status()
-    return resp.json()["access_token"]
 
 
 def get_person_urn(access_token):
@@ -47,7 +26,6 @@ def get_person_urn(access_token):
 
 
 def upload_image(access_token, person_urn, image_path):
-    """3 addımlı LinkedIn Images API axını: init -> binary upload -> URN."""
     init = requests.post(
         "https://api.linkedin.com/rest/images?action=initializeUpload",
         headers={
@@ -118,7 +96,7 @@ def main():
     with open(json_path, encoding="utf-8") as f:
         draft = json.load(f)
 
-    access_token = get_access_token()
+    access_token = os.environ["LINKEDIN_ACCESS_TOKEN"]
     person_urn = get_person_urn(access_token)
     image_urn = upload_image(access_token, person_urn, image_path)
     post_id = create_post(access_token, person_urn, draft["post_text"], image_urn)

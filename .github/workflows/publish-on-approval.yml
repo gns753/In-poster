@@ -23,9 +23,7 @@ jobs:
       - name: LinkedIn-də paylaş
         env:
           ISSUE_TITLE: ${{ github.event.issue.title }}
-          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
-          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
-          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
         run: python scripts/publish_to_linkedin.py
 
       - name: Issue-nu bağla
