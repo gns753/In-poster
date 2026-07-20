@@ -12,6 +12,7 @@ import base64
 import json
 import os
 import re
+import time
 from datetime import datetime, timedelta, timezone
 
 import feedparser
@@ -225,11 +226,23 @@ AZ OLMASIN - qısa yazma). Bu quruluşu izlə:
 Yuxarıdaki "Writing style" bölməsindəki ton, emoji və format qaydalarına əməl et.>
 POST_TEXT_END"""
 
-    response = client.chat.completions.create(
-        model=NVIDIA_TEXT_MODEL,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
-    )
+    response = None
+    last_error = None
+    for attempt in range(1, 4):
+        try:
+            response = client.chat.completions.create(
+                model=NVIDIA_TEXT_MODEL,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.7,
+            )
+            break
+        except Exception as e:
+            print(f"NVIDIA mətn API xətası (cəhd {attempt}/3): {e}")
+            last_error = e
+            if attempt < 3:
+                time.sleep(attempt * 10)
+    if response is None:
+        raise last_error
     raw = response.choices[0].message.content.strip()
 
     def extract_line(pattern, text, default=""):
@@ -257,30 +270,42 @@ POST_TEXT_END"""
     }
 
 
-def generate_image(image_prompt, out_path):
-    resp = requests.post(
-        NVIDIA_IMAGE_INVOKE_URL,
-        headers={
-            "Authorization": f"Bearer {os.environ['NVIDIA_API_KEY']}",
-            "Accept": "application/json",
-        },
-        json={
-            "prompt": image_prompt,
-            "mode": "base",
-            "cfg_scale": 3.5,
-            "width": 1024,
-            "height": 1024,
-            "seed": 0,
-            "steps": 50,
-        },
-        timeout=90,
-    )
-    if resp.status_code != 200:
-        print(f"NVIDIA şəkil API cavabı ({resp.status_code}): {resp.text[:800]}")
-    resp.raise_for_status()
-    img_bytes = base64.b64decode(resp.json()["artifacts"][0]["base64"])
-    with open(out_path, "wb") as f:
-        f.write(img_bytes)
+def generate_image(image_prompt, out_path, max_retries=3):
+    last_error = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            resp = requests.post(
+                NVIDIA_IMAGE_INVOKE_URL,
+                headers={
+                    "Authorization": f"Bearer {os.environ['NVIDIA_API_KEY']}",
+                    "Accept": "application/json",
+                },
+                json={
+                    "prompt": image_prompt,
+                    "mode": "base",
+                    "cfg_scale": 3.5,
+                    "width": 1024,
+                    "height": 1024,
+                    "seed": 0,
+                    "steps": 50,
+                },
+                timeout=90,
+            )
+            if resp.status_code == 200:
+                img_bytes = base64.b64decode(resp.json()["artifacts"][0]["base64"])
+                with open(out_path, "wb") as f:
+                    f.write(img_bytes)
+                return
+            print(f"NVIDIA şəkil API cavabı (cəhd {attempt}/{max_retries}, {resp.status_code}): {resp.text[:400]}")
+            last_error = requests.exceptions.HTTPError(f"{resp.status_code} Server Error", response=resp)
+        except requests.exceptions.RequestException as e:
+            print(f"Şəbəkə xətası (cəhd {attempt}/{max_retries}): {e}")
+            last_error = e
+        if attempt < max_retries:
+            wait = attempt * 10
+            print(f"{wait} saniyə gözləyib yenidən cəhd edilir...")
+            time.sleep(wait)
+    raise last_error
 
 
 def build_issue_body(draft_id, draft, image_url):
