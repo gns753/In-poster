@@ -22,20 +22,135 @@ from openai import OpenAI
 # Bunları öz zövqünə/mənbələrinə görə dəyişə bilərsən.
 
 RSS_FEEDS = [
+    # AI News
     "https://techcrunch.com/category/artificial-intelligence/feed/",
     "https://venturebeat.com/category/ai/feed/",
     "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+    "https://openai.com/news/rss.xml",
+    "https://www.anthropic.com/news/rss.xml",
+
+    # Engineering & Product
+    "https://www.producthunt.com/feed",
+    "https://feeds.feedburner.com/MindTheProduct",
+    "https://www.svpg.com/feed/",
+    "https://martinfowler.com/feed.atom",
+
+    # AI Research
+    "https://huggingface.co/blog/feed.xml",
+    "https://www.deeplearning.ai/the-batch/feed/",
+    "https://www.marktechpost.com/feed/",
+
+    # Startups & VC
+    "https://a16z.com/feed/",
+    "https://www.ycombinator.com/blog/feed",
+
+    # Developer
+    "https://stackoverflow.blog/feed/",
 ]
+
 HN_KEYWORDS = [
-    "ai", "llm", "gpt", "agent", "product", "prompt",
-    "openai", "anthropic", "claude", "machine learning",
+    # AI
+    "ai",
+    "artificial intelligence",
+    "generative ai",
+    "llm",
+    "foundation model",
+    "multimodal",
+    "reasoning model",
+    "gpt",
+    "claude",
+    "gemini",
+    "deepseek",
+    "qwen",
+    "mistral",
+    "llama",
+    "phi",
+
+    # Agentic AI
+    "agent",
+    "ai agent",
+    "agentic",
+    "workflow",
+    "automation",
+    "copilot",
+    "rag",
+    "vector database",
+    "mcp",
+    "tool calling",
+    "function calling",
+
+    # Prompt Engineering
+    "prompt",
+    "prompt engineering",
+    "system prompt",
+    "evaluation",
+    "guardrails",
+
+    # Product
+    "product",
+    "product management",
+    "product owner",
+    "product manager",
+    "roadmap",
+    "customer discovery",
+    "feature",
+    "ux",
+
+    # Startups
+    "startup",
+    "saas",
+    "founder",
+    "vc",
+    "funding",
+
+    # Companies
+    "openai",
+    "anthropic",
+    "google ai",
+    "microsoft ai",
+    "meta ai",
+    "nvidia",
 ]
-PERSONA = "AI Prompt Engineering bacarığı olan Product Owner"
+PERSONA = """
+You are an experienced Product Owner specializing in AI-powered products.
+
+Your audience:
+- Product Owners
+- Product Managers
+- Startup founders
+- Software Engineers
+- AI enthusiasts
+- CTOs
+
+Your expertise:
+- Product Management
+- Agile & Scrum
+- AI Product Strategy
+- Prompt Engineering
+- LLMs
+- AI Agents
+- Automation
+- UX
+- API integrations
+
+Writing style:
+- Professional but conversational
+- Insightful, not sensational
+- Focus on business impact rather than repeating news
+- Explain why the news matters for product teams
+- Add your own perspective
+- Keep posts between 120-250 words
+- Use clean formatting
+- Avoid emojis unless they add value
+- End with one engaging question to encourage discussion
+- Never copy the original article
+- Mention practical takeaways
+"""
 
 # build.nvidia.com kataloqu dəyişə bilər - hər ehtimala qarşı model adlarını
 # https://build.nvidia.com/models səhifəsində yoxla.
 NVIDIA_TEXT_MODEL = "meta/llama-3.3-70b-instruct"
-NVIDIA_IMAGE_MODEL = "black-forest-labs/flux.1-dev"
+NVIDIA_IMAGE_INVOKE_URL = "https://ai.api.nvidia.com/v1/genai/stabilityai/sdxl-turbo"
 
 ARTICLE_LOOKBACK_HOURS = 48
 MAX_ARTICLES_TO_MODEL = 30
@@ -135,13 +250,26 @@ Yalnız aşağıdakı JSON formatında cavab ver, başqa heç nə yazma (kod blo
 
 
 def generate_image(image_prompt, out_path):
-    response = client.images.generate(
-        model=NVIDIA_IMAGE_MODEL,
-        prompt=image_prompt,
-        n=1,
-        response_format="b64_json",
+    resp = requests.post(
+        NVIDIA_IMAGE_INVOKE_URL,
+        headers={
+            "Authorization": f"Bearer {os.environ['NVIDIA_API_KEY']}",
+            "Accept": "application/json",
+        },
+        json={
+            "text_prompts": [{"text": image_prompt}],
+            "seed": 0,
+            "sampler": "K_EULER_ANCESTRAL",
+            "steps": 4,
+        },
+        timeout=60,
     )
-    img_bytes = base64.b64decode(response.data[0].b64_json)
+    if resp.status_code != 200:
+        # Uğursuz olsa, NVIDIA-nın öz cavabını çap et - bu, tam traceback-dən
+        # daha faydalıdır, çünki dəqiq nəyin səhv olduğunu göstərir.
+        print(f"NVIDIA şəkil API cavabı ({resp.status_code}): {resp.text[:800]}")
+    resp.raise_for_status()
+    img_bytes = base64.b64decode(resp.json()["artifacts"][0]["base64"])
     with open(out_path, "wb") as f:
         f.write(img_bytes)
 
