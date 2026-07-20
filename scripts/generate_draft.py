@@ -105,7 +105,7 @@ Writing style:
 
 # build.nvidia.com kataloqu dəyişə bilər - hər ehtimala qarşı model adlarını
 # https://build.nvidia.com/models səhifəsində yoxla.
-NVIDIA_TEXT_MODEL = "nvidia/llama-3.3-nemotron-super-49b-v1.5"
+NVIDIA_TEXT_MODEL = "meta/llama-3.3-70b-instruct"
 # NVIDIA-nın hosted kataloqunda şəkil modelləri OpenAI formatı ilə YOX, öz
 # "invoke" formatı ilə çağırılır - bax https://build.nvidia.com/models,
 # modelə klikləyib "Python" tabındaki nümunə koda.
@@ -187,8 +187,11 @@ def choose_and_write(articles):
 
     prompt = f"""{PERSONA}
 
-VACIB: Yuxarıdakı təlimatlar ingiliscə olsa da, POST_TEXT və REASON Azərbaycan
-dilində yazılmalıdır. Yalnız IMAGE_PROMPT ingiliscə olsun.
+VACIB: Yuxarıdakı təlimatlar ingiliscə olsa da, POST_TEXT və REASON FASİH,
+qrammatik cəhətdən DÜZGÜN Azərbaycan dilində yazılmalıdır. Qondarma söz,
+yanlış hərfi tərcümə, başqa dildən (məsələn türk dilindən) hərfi keçirmə
+qəti qəbuledilməzdir - hər söz həqiqi, standart Azərbaycan sözü olmalıdır.
+Yalnız IMAGE_PROMPT ingiliscə olsun.
 
 Aşağıda son {ARTICLE_LOOKBACK_HOURS} saatın texnologiya xəbərləri var (nömrələnmiş).
 
@@ -205,10 +208,11 @@ markdown qalın (**) işarəsi və kod bloku (```) işarəsi qoyma:
 
 CHOSEN_INDEX: <seçdiyin xəbərin nömrəsi>
 REASON: <niyə seçdiyini bir cümlə ilə izah et, Azərbaycan dilində>
-IMAGE_PROMPT: <şəklin İNGİLİSCƏ təsviri, bir sətirdə: xəbərin KONKRET mövzusuna aid spesifik vizual metafora - mövzu nədən bəhs edirsə məhz onu flat-design illüstrasiya kimi göstər, ümumi "AI" simvolikası yox. BUNLARI İSTİFADƏ ETMƏ: robot insanla əl sıxışır, dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi kürəsi, futuristik hologram. Professional, minimal, real loqo/brend adı olmadan.>
+IMAGE_PROMPT: <şəklin İNGİLİSCƏ təsviri, bir sətirdə. KONKRET, gözlə görünə bilən 2-3 əşya/element təsvir et ki, xəbərin mövzusundan bilavasitə çıxsın (məsələn "a grid of small monitor screens showing different camera angles connected by glowing lines to a central dashboard" kimi konkret bir səhnə). BUNU YAZMA: tək bir mücərrəd 3D forma və ya aydın mövzusu olmayan həndəsi fiqur - bu, şəkil modelinin "təhlükəsiz" defolt seçimidir və mövzuya heç bağlı olmur. BUNLARI da İSTİFADƏ ETMƏ: robot insanla əl sıxışır, dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi kürəsi, futuristik hologram. Professional, minimal, flat-design, real loqo/brend adı olmadan.>
 POST_TEXT_START
 <Azərbaycan dilində LinkedIn postu, yuxarıdaki "Writing style" təlimatlarına (söz sayı, ton, quruluş) tam uyğun>
 POST_TEXT_END"""
+    
 
     response = client.chat.completions.create(
         model=NVIDIA_TEXT_MODEL,
