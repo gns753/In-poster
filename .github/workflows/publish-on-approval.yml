@@ -1,0 +1,44 @@
+name: Publish approved LinkedIn post
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  publish:
+    if: github.event.label.name == 'approved'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Asılılıqları quraşdır
+        run: pip install -r requirements.txt
+
+      - name: LinkedIn-də paylaş
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+        run: python scripts/publish_to_linkedin.py
+
+      - name: Issue-nu bağla
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --body "✅ LinkedIn-də uğurla paylaşıldı."
+          gh issue close "${{ github.event.issue.number }}"
+
+      - name: Uğursuzluq barədə xəbərdarlıq
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --body "❌ Paylaşım alınmadı - workflow log-una bax."
