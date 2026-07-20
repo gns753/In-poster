@@ -150,7 +150,7 @@ Writing style:
 # build.nvidia.com kataloqu dəyişə bilər - hər ehtimala qarşı model adlarını
 # https://build.nvidia.com/models səhifəsində yoxla.
 NVIDIA_TEXT_MODEL = "meta/llama-3.3-70b-instruct"
-NVIDIA_IMAGE_INVOKE_URL = "https://ai.api.nvidia.com/v1/genai/stabilityai/sdxl-turbo"
+NVIDIA_IMAGE_INVOKE_URL = "https://ai.api.nvidia.com/v1/genai/black-forest-labs/flux.1-dev"
 
 ARTICLE_LOOKBACK_HOURS = 48
 MAX_ARTICLES_TO_MODEL = 30
@@ -257,16 +257,17 @@ def generate_image(image_prompt, out_path):
             "Accept": "application/json",
         },
         json={
-            "text_prompts": [{"text": image_prompt}],
+            "prompt": image_prompt,
+            "mode": "base",
+            "cfg_scale": 3.5,
+            "width": 1024,
+            "height": 1024,
             "seed": 0,
-            "sampler": "K_EULER_ANCESTRAL",
-            "steps": 4,
+            "steps": 50,
         },
-        timeout=60,
+        timeout=90,
     )
     if resp.status_code != 200:
-        # Uğursuz olsa, NVIDIA-nın öz cavabını çap et - bu, tam traceback-dən
-        # daha faydalıdır, çünki dəqiq nəyin səhv olduğunu göstərir.
         print(f"NVIDIA şəkil API cavabı ({resp.status_code}): {resp.text[:800]}")
     resp.raise_for_status()
     img_bytes = base64.b64decode(resp.json()["artifacts"][0]["base64"])
