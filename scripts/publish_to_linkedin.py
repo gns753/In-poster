@@ -81,14 +81,14 @@ def create_post(access_token, person_urn, text, image_urn):
 
 
 def main():
-    issue_title = os.environ.get("ISSUE_TITLE", "")
-    match = re.search(r"\d{4}-\d{2}-\d{2}", issue_title)
+    issue_body = os.environ.get("ISSUE_BODY", "")
+    match = re.search(r"<!-- DRAFT_ID:\s*(.+?)\s*-->", issue_body)
     if not match:
-        print(f"Issue başlığında tarix (YYYY-MM-DD) tapılmadı: '{issue_title}'")
+        print("Issue mətnində DRAFT_ID markeri tapılmadı - bu issue bu skriptlə uyğun deyil.")
         sys.exit(1)
-    date = match.group(0)
+    draft_id = match.group(1)
 
-    json_path, image_path = f"pending/{date}.json", f"pending/{date}.png"
+    json_path, image_path = f"pending/{draft_id}.json", f"pending/{draft_id}.png"
     if not (os.path.exists(json_path) and os.path.exists(image_path)):
         print(f"Draft faylları tapılmadı: {json_path} / {image_path}")
         sys.exit(1)

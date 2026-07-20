@@ -105,6 +105,10 @@ Writing style:
 
 # build.nvidia.com kataloqu dəyişə bilər - hər ehtimala qarşı model adlarını
 # https://build.nvidia.com/models səhifəsində yoxla.
+# QEYD: nvidia/llama-3.3-nemotron-super-49b-v1.5 sınandı, amma Azərbaycan
+# dilində uydurma sözlər yaradırdı (NAS-distillasiya reasoning/İngiliscə
+# performansa optimallaşdırılıb, az yayılmış dil səlisliyini qurban verib).
+# meta/llama-3.3-70b-instruct-a qayıdıldı - bu, sübut olunmuş yaxşı nəticə verirdi.
 NVIDIA_TEXT_MODEL = "meta/llama-3.3-70b-instruct"
 # NVIDIA-nın hosted kataloqunda şəkil modelləri OpenAI formatı ilə YOX, öz
 # "invoke" formatı ilə çağırılır - bax https://build.nvidia.com/models,
@@ -210,9 +214,16 @@ CHOSEN_INDEX: <seçdiyin xəbərin nömrəsi>
 REASON: <niyə seçdiyini bir cümlə ilə izah et, Azərbaycan dilində>
 IMAGE_PROMPT: <şəklin İNGİLİSCƏ təsviri, bir sətirdə. KONKRET, gözlə görünə bilən 2-3 əşya/element təsvir et ki, xəbərin mövzusundan bilavasitə çıxsın (məsələn "a grid of small monitor screens showing different camera angles connected by glowing lines to a central dashboard" kimi konkret bir səhnə). BUNU YAZMA: tək bir mücərrəd 3D forma və ya aydın mövzusu olmayan həndəsi fiqur - bu, şəkil modelinin "təhlükəsiz" defolt seçimidir və mövzuya heç bağlı olmur. BUNLARI da İSTİFADƏ ETMƏ: robot insanla əl sıxışır, dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi kürəsi, futuristik hologram. Professional, minimal, flat-design, real loqo/brend adı olmadan.>
 POST_TEXT_START
-<Azərbaycan dilində LinkedIn postu, yuxarıdaki "Writing style" təlimatlarına (söz sayı, ton, quruluş) tam uyğun>
+<Azərbaycan dilində, MƏQALƏ TƏRZİNDƏ LinkedIn postu, TAM 180-250 söz (bundan
+AZ OLMASIN - qısa yazma). Bu quruluşu izlə:
+(1) Diqqətçəkən ilk sətir - xəbərdəki KONKRET bir fakt, rəqəm və ya addan başla, ümumi giriş cümləsi yazma
+(2) 3-4 cümlə - nə oldu, kim/nə edib, mənbədən ən azı 2 konkret detal istifadə et
+(3) 3-4 cümlə - MƏHZ Product Owner/Product Manager auditoriyası üçün bunun praktiki mənası: hansı qərara, prioritetə, riskə və ya imkana təsir edir - ümumi "AI gələcəyi dəyişəcək" tipli cümlə YOX, konkret iş nəticəsi
+(4) 1-2 cümlə - yuxarıdaki PERSONA-nın şəxsi mövqeyi/təcrübəsi
+(5) Oxucuya yönəlmiş açıq, düşündürücü sual
+(6) 3-5 aidiyyəti hashtag
+Yuxarıdaki "Writing style" bölməsindəki ton, emoji və format qaydalarına əməl et.>
 POST_TEXT_END"""
-    
 
     response = client.chat.completions.create(
         model=NVIDIA_TEXT_MODEL,
@@ -235,8 +246,6 @@ POST_TEXT_END"""
     post_text = extract_block(r"POST_TEXT_START\**\s*(.*?)\s*\**POST_TEXT_END", raw)
 
     if not post_text:
-        # Model formatı tam izləməyibsə, tam cavabı göstər ki, log-dan görüb
-        # promptu bir də tənzimləyə bilək - kor-koranə davam etmirik.
         raise ValueError(f"Modelin cavabı gözlənilən formatda deyil:\n{raw[:1500]}")
 
     return {
@@ -274,8 +283,9 @@ def generate_image(image_prompt, out_path):
         f.write(img_bytes)
 
 
-def build_issue_body(today, draft, image_url):
-    return f"""## Təklif olunan LinkedIn postu ({today})
+def build_issue_body(draft_id, draft, image_url):
+    return f"""<!-- DRAFT_ID: {draft_id} -->
+## Təklif olunan LinkedIn postu ({draft_id})
 
 **Mənbə:** [{draft['source']['title']}]({draft['source']['url']})
 **Niyə seçildi:** {draft['reason']}
@@ -295,6 +305,11 @@ Bəyənməsən, sadəcə issue-nu bağla, heç nə paylaşılmayacaq."""
 
 def main():
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    # Hər run-a unikal ID veririk (tarix + GitHub run ID). Bu, eyni gündə
+    # bir neçə dəfə test edərkən köhnə issue-ların faylının üzərinə yazılıb
+    # şəkil/mətnin qarışmasının qarşısını alır.
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    draft_id = f"{today}_{run_id}"
     os.makedirs("pending", exist_ok=True)
 
     articles = collect_articles()
@@ -304,10 +319,10 @@ def main():
 
     draft = choose_and_write(articles)
 
-    image_path = f"pending/{today}.png"
+    image_path = f"pending/{draft_id}.png"
     generate_image(draft["image_prompt"], image_path)
 
-    json_path = f"pending/{today}.json"
+    json_path = f"pending/{draft_id}.json"
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(draft, f, ensure_ascii=False, indent=2)
 
@@ -315,7 +330,7 @@ def main():
     image_url = f"https://raw.githubusercontent.com/{repo}/main/{image_path}"
 
     with open("pending/issue_body.md", "w", encoding="utf-8") as f:
-        f.write(build_issue_body(today, draft, image_url))
+        f.write(build_issue_body(draft_id, draft, image_url))
 
     print(f"Draft hazırdır: {json_path}")
     print(f"Seçilən xəbər: {draft['source']['title']}")

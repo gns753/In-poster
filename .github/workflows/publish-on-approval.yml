@@ -22,7 +22,7 @@ jobs:
 
       - name: LinkedIn-də paylaş
         env:
-          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
         run: python scripts/publish_to_linkedin.py
 
