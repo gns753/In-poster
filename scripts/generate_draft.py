@@ -142,7 +142,7 @@ def collect_articles():
                 articles.append({
                     "title": entry.get("title", ""),
                     "url": entry.get("link", ""),
-                    "summary": re.sub("<[^<]+?>", "", entry.get("summary", ""))[:400],
+                    "summary": re.sub("<[^<]+?>", "", entry.get("summary", ""))[:600],
                 })
         except Exception as e:
             print(f"RSS xətası ({url}): {e}")
@@ -221,10 +221,13 @@ IMAGE_CONCEPT: <bir neçə sözlə (ingiliscə), bu KONKRET xəbərin əsas texn
                 tap: "model size comparison", "multi-camera tracking pipeline",
                 "code generation workflow")>
 IMAGE_PROMPT: <yuxarıdaki IMAGE_CONCEPT-i vizuallaşdıran İNGİLİSCƏ təsvir, bir sətirdə.
-              Əgər konsepsiya müqayisə/reytinqdirsə, ölçü fərqini göstərən stilizə
-              bar-chart/tərəzi/podium vizualı işlət (real loqo olmadan). Əgər
-              proses/pipeline-dirsə, addımları göstərən sadə axın sxemi işlət.
-              Əgər konkret alət/funksiyadırsa, onun funksiyasını göstər.
+              ŞƏKİLDƏ HEÇ BİR MƏTN, RƏQƏM, HƏRF VƏ YA YAZI OLMASIN - şəkil generasiya
+              modelləri mətni oxunaqlı göstərə bilmir, nəticə həmişə qarışmış simvollar
+              olur. Fikri YALNIZ vizual obyektlər, formalar, ölçü və rənglə ifadə et.
+              Əgər konsepsiya müqayisə/reytinqdirsə, MƏTNSİZ fərqli ÖLÇÜDƏ obyektlər/
+              fiqurlar işlət (məsələn kiçik və böyük bloklar yanaşı, ƏDƏD/YAZI olmadan).
+              Əgər proses/pipeline-dirsə, addımları göstərən sadə (yazısız) axın sxemi
+              işlət. Əgər konkret alət/funksiyadırsa, onun funksiyasını göstər.
               BUNLARI İSTİFADƏ ETMƏ (klişedir, HEÇ BİR mövzu üçün işlətmə): robot
               insanla əl sıxışır, dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi
               kürəsi, futuristik hologram, monitor/kamera divarı və izləmə xətləri
@@ -233,7 +236,10 @@ IMAGE_PROMPT: <yuxarıdaki IMAGE_CONCEPT-i vizuallaşdıran İNGİLİSCƏ təsvi
               real loqo/brend adı olmadan.>
 POST_TEXT_START
 <Azərbaycan dilində, MƏQALƏ TƏRZİNDƏ LinkedIn postu, TAM 180-250 söz (bundan
-AZ OLMASIN - qısa yazma). Bu quruluşu izlə:
+AZ OLMASIN - qısa yazma). HEÇ BİR CÜMLƏ öz-özünə istinad edən, məzmunsuz formada
+olmasın - "bu xəbər ... barədə məlumat verir", "bu vacibdir çünki ... etməlidirlər"
+kimi dövrü, heç nə YENİ deməyən cümlələr QƏTİ QƏBULEDİLMƏZDİR. Hər cümlə YENİ,
+konkret məlumat və ya iddia əlavə etməlidir. Bu quruluşu izlə:
 (1) Diqqətçəkən ilk sətir - xəbərdəki KONKRET bir fakt, rəqəm və ya addan başla, ümumi giriş cümləsi yazma
 (2) 3-4 cümlə - nə oldu, kim/nə edib, mənbədən ən azı 2 konkret detal istifadə et
 (3) 3-4 cümlə - Bu xəbərin Product Owner/Product Manager üçün KONKRET nəticəsini
@@ -241,7 +247,8 @@ AZ OLMASIN - qısa yazma). Bu quruluşu izlə:
     struktur nümunəsidir, sözbəsöz köçürmə): "Bu, [konkret komanda/məhsul növü]
     üçün deməkdir ki, [konkret dəyişiklik] baş verə bilər, çünki [səbəb]." Sən bu
     xəbərə uyğun, öz KONKRET versiyanı yaz - "necə təsir edəcək?" kimi sual YAZMA,
-    CAVABI ÖZÜN VER.
+    CAVABI ÖZÜN VER. "Təhlükəsizliyi təmin etməlidirlər" kimi ümumi, hər mövzuya
+    tətbiq oluna bilən cümlə YAZMA - bu XƏBƏRƏ MƏXSUS bir nəticə olmalıdır.
 (4) 1-2 cümlə - yuxarıdaki PERSONA-nın şəxsi mövqeyi/təcrübəsi
 (5) Oxucuya yönəlmiş açıq, düşündürücü sual (SUAL YALNIZ BURADA olsun, (3)-də yox)
 (6) 3-5 aidiyyəti hashtag
@@ -316,7 +323,7 @@ def generate_image(image_prompt, out_path, max_retries=3):
                     "width": 1024,
                     "height": 1024,
                     "seed": 0,
-                    "steps": 50,
+                    "steps": 25,
                 },
                 timeout=90,
             )
