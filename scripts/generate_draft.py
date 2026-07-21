@@ -259,6 +259,7 @@ POST_TEXT_END"""
                 model=NVIDIA_TEXT_MODEL,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,
+                max_tokens=1500,  # Azərbaycan hərfləri (ə,ş,ç,ğ) ingiliscədən daha çox token tutur - defolt limit 250 sözlük postu kəsə bilirdi
             )
             break
         except Exception as e:
@@ -282,9 +283,12 @@ POST_TEXT_END"""
     reason = extract_line(r"REASON:\**\s*(.+)", raw)
     image_prompt = extract_line(r"IMAGE_PROMPT:\**\s*(.+)", raw)
     post_text = extract_block(r"POST_TEXT_START\**\s*(.*?)\s*\**POST_TEXT_END", raw)
-
     if not post_text:
-        raise ValueError(f"Modelin cavabı gözlənilən formatda deyil:\n{raw[:1500]}")
+        # POST_TEXT_END markeri yoxdursa (məs. cavab kəsilibsə), ehtiyat olaraq
+        # START-dan mətnin sonuna qədər olan hissəni götürürük - çökmək əvəzinə.
+        post_text = extract_block(r"POST_TEXT_START\**\s*(.*)", raw)
+        if post_text:
+            print("QEYD: POST_TEXT_END markeri tapılmadı, START-dan sona qədər olan mətn istifadə olundu.")
 
     return {
         "chosen_index": chosen_index,
