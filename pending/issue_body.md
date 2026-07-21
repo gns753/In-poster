@@ -1,21 +1,22 @@
-<!-- DRAFT_ID: 2026-07-21_29810509511 -->
-## Təklif olunan LinkedIn postu (2026-07-21_29810509511)
+<!-- DRAFT_ID: 2026-07-21_29813962158 -->
+## Təklif olunan LinkedIn postu (2026-07-21_29813962158)
 
-**Mənbə:** [China delivers a one-two punch to America’s AI dominance](https://www.theverge.com/ai-artificial-intelligence/967781/chinese-ai-models-open-source-moonshot-kimi-k3-alibaba-qwen)
-**Niyə seçildi:** Çin istehsalı olan AI modelləri Amerikanın AI sahəsindəki dominantlığını təhdid edir.
-
----
-
-1,5 milyard dollarlıq Çin istehsalı olan AI modelləri Amerikanın AI sahəsindəki dominantlığını təhdid edir. Çin lider AI şirkətləri, Moonshot və Alibaba, Amerikanın ən yaxşı modelləri ilə rəqabət apara biləcək modellər buraxdılar. Bu, AI texnologiyalarının inkişafı ilə yanaşı, Amerikanın dominantlıq mövqeyini itələndirir.
-Moonshot və Alibaba tərəfindən buraxılan modellər, Amerikanın ən yaxşı modelləri ilə müqayisədə daha ucuz və effektivdir. Bu, AI texnologiyalarının inkişafı ilə yanaşı, Amerikanın dominantlıq mövqeyini itələndirir. 
-Product Owner və Product Manager kimi, bizə bu inkişafın praktiki mənasını anlamamız lazımdır. AI texnologiyalarının inkişafı, biznes strategiyamızı və prioritetlərimizi yenidən müəyyən etməyə imkan verə bilər.
-Şəxsi təcrübəmə əsasən, AI texnologiyalarının inkişafı, müştərək işləmə və innovasiyaya imkan verə bilər. Lakin, eyni zamanda, biznes strategiyamızı və prioritetlərimizi yenidən müəyyən etməyə ehtiyacımız var.
-Nə düşünürsünüz, AI texnologiyalarının inkişafı biznes strategiyamızı necə dəyişəcək? 
-#AI #Innovasiya #Texnologiya #Biznes #Strategiya #Inkişaf
+**Mənbə:** [Safety and alignment in an era of long-horizon models](https://openai.com/index/safety-alignment-long-horizon-models)
+**Niyə seçildi:** Bu xəbər OpenAI tərəfindən nəşr olunmuş "Safety and alignment in an era of long-horizon models" məqaləsindən bəhs edir və AI agentlərinin uzun müddətli işləməsinin təhlükəsizliyi və uyğunluğu barədə məlumat verən bir xəbərdir.
 
 ---
 
-![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-21_29810509511.png)
+Anthropic şirkətinin 1.5 milyardlıq müəyyən mübahisəsi təsdiqə alınmışdır, lakin bu, daha geniş müəyyən mübahisə məsələsini həll etmir. Bu xəbər, müəyyən mübahisələrin həll olunması üçün vacib addımların atılması barədə məlumat verən bir xəbərdir. 
+OpenAI tərəfindən nəşr olunmuş "Safety and alignment in an era of long-horizon models" məqaləsi, AI agentlərinin uzun müddətli işləməsinin təhlükəsizliyi və uyğunluğu barədə məlumat verir. 
+Bu xəbər, Product Owner və Product Manager üçün vacibdir, çünki onlar AI agentlərinin təhlükəsizliyi və uyğunluğunu təmin etməlidirlər. 
+Bu xəbərin nəticəsi odur ki, AI agentləri daha təhlükəsiz və uyğun şəkildə işlədilməlidir, çünki onlar daha uzun müddətli işlədiləcəklər. 
+Mənəvi mövqeyim odur ki, AI agentlərinin təhlükəsizliyi və uyğunluğu barədə daha çox məlumat almaq vacibdir. 
+Sual verilən sual odur: AI agentlərinin təhlükəsizliyi və uyğunluğu necə təmin olunacaq?
+#AI #ProductOwner #ProductManager #Safety #Alignment #LongHorizonModels
+
+---
+
+![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-21_29813962158.png)
 
 ---
 Bəyənirsənsə, bu issue-ya **`approved`** etiketini əlavə et - avtomatik LinkedIn-də paylaşılacaq.

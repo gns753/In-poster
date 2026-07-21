@@ -1,0 +1,11 @@
+{
+  "chosen_index": 15,
+  "reason": "Bu xəbər OpenAI tərəfindən nəşr olunmuş \"Safety and alignment in an era of long-horizon models\" məqaləsindən bəhs edir və AI agentlərinin uzun müddətli işləməsinin təhlükəsizliyi və uyğunluğu barədə məlumat verən bir xəbərdir.",
+  "post_text": "Anthropic şirkətinin 1.5 milyardlıq müəyyən mübahisəsi təsdiqə alınmışdır, lakin bu, daha geniş müəyyən mübahisə məsələsini həll etmir. Bu xəbər, müəyyən mübahisələrin həll olunması üçün vacib addımların atılması barədə məlumat verən bir xəbərdir. \nOpenAI tərəfindən nəşr olunmuş \"Safety and alignment in an era of long-horizon models\" məqaləsi, AI agentlərinin uzun müddətli işləməsinin təhlükəsizliyi və uyğunluğu barədə məlumat verir. \nBu xəbər, Product Owner və Product Manager üçün vacibdir, çünki onlar AI agentlərinin təhlükəsizliyi və uyğunluğunu təmin etməlidirlər. \nBu xəbərin nəticəsi odur ki, AI agentləri daha təhlükəsiz və uyğun şəkildə işlədilməlidir, çünki onlar daha uzun müddətli işlədiləcəklər. \nMənəvi mövqeyim odur ki, AI agentlərinin təhlükəsizliyi və uyğunluğu barədə daha çox məlumat almaq vacibdir. \nSual verilən sual odur: AI agentlərinin təhlükəsizliyi və uyğunluğu necə təmin olunacaq?\n#AI #ProductOwner #ProductManager #Safety #Alignment #LongHorizonModels",
+  "image_prompt": "A simple timeline diagram showing the evolution of AI models from short-term to long-term, with safety and alignment considerations increasing over time.",
+  "source": {
+    "title": "Safety and alignment in an era of long-horizon models",
+    "url": "https://openai.com/index/safety-alignment-long-horizon-models",
+    "summary": "OpenAI shares lessons from deploying long-running AI models, highlighting new safety risks, observed failures, and improved safeguards through iterative deployment."
+  }
+}
