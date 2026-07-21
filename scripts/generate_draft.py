@@ -196,14 +196,16 @@ VACIB: Yuxarıdakı təlimatlar ingiliscə olsa da, POST_TEXT və REASON FASİH,
 qrammatik cəhətdən DÜZGÜN Azərbaycan dilində yazılmalıdır. Qondarma söz,
 yanlış hərfi tərcümə, başqa dildən (məsələn türk dilindən) hərfi keçirmə
 qəti qəbuledilməzdir - hər söz həqiqi, standart Azərbaycan sözü olmalıdır.
-Yalnız IMAGE_PROMPT ingiliscə olsun.
+Yalnız IMAGE_CONCEPT və IMAGE_PROMPT ingiliscə olsun.
 
 Aşağıda son {ARTICLE_LOOKBACK_HOURS} saatın texnologiya xəbərləri var (nömrələnmiş).
 
 SEÇİM MEYARI: Yalnız BİRİNİ seç. Kiçik, tək bir alətin sadə "işə salındı" elanını
-və ya məzmunca kasıb, dərinliyi olmayan xəbərləri SEÇMƏ. Əvəzinə, arxasında real
-substansiya olan və yuxarıdaki auditoriya üçün maraqlı, konkret fikir yazmaq
-mümkün olan bir xəbər seç.
+və ya məzmunca kasıb, dərinliyi olmayan xəbərləri SEÇMƏ. Sadəcə "hansı şirkətin
+modeli daha güclüdür/böyükdür" müqayisəsi olan, konkret biznes nəticəsi olmayan
+xəbərləri də ÖNCƏLİKLƏNDİRMƏ - bunlar Product Owner üçün əməli dəyər vermir.
+Əvəzinə, məhsul qərarına, iş prosesinə, qiymətləndirməyə, istifadəçi
+təcrübəsinə və ya komanda prioritetlərinə BİLAVASİTƏ təsir edən bir xəbər seç.
 
 Xəbərlər:
 {articles_text}
@@ -213,18 +215,41 @@ markdown qalın (**) işarəsi və kod bloku (```) işarəsi qoyma:
 
 CHOSEN_INDEX: <seçdiyin xəbərin nömrəsi>
 REASON: <niyə seçdiyini bir cümlə ilə izah et, Azərbaycan dilində>
-IMAGE_PROMPT: <şəklin İNGİLİSCƏ təsviri, bir sətirdə. KONKRET, gözlə görünə bilən 2-3 əşya/element təsvir et ki, xəbərin mövzusundan bilavasitə çıxsın (məsələn "a grid of small monitor screens showing different camera angles connected by glowing lines to a central dashboard" kimi konkret bir səhnə). BUNU YAZMA: tək bir mücərrəd 3D forma və ya aydın mövzusu olmayan həndəsi fiqur - bu, şəkil modelinin "təhlükəsiz" defolt seçimidir və mövzuya heç bağlı olmur. BUNLARI da İSTİFADƏ ETMƏ: robot insanla əl sıxışır, dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi kürəsi, futuristik hologram. Professional, minimal, flat-design, real loqo/brend adı olmadan.>
+IMAGE_CONCEPT: <bir neçə sözlə (ingiliscə), bu KONKRET xəbərin əsas texniki/işgüzar
+                konsepsiyası - xəbərin adından/mətnindən BİLAVASİTƏ çıxmalıdır
+                (bunlar YALNIZ format nümunəsidir, mövzuya uyğun öz variantını
+                tap: "model size comparison", "multi-camera tracking pipeline",
+                "code generation workflow")>
+IMAGE_PROMPT: <yuxarıdaki IMAGE_CONCEPT-i vizuallaşdıran İNGİLİSCƏ təsvir, bir sətirdə.
+              Əgər konsepsiya müqayisə/reytinqdirsə, ölçü fərqini göstərən stilizə
+              bar-chart/tərəzi/podium vizualı işlət (real loqo olmadan). Əgər
+              proses/pipeline-dirsə, addımları göstərən sadə axın sxemi işlət.
+              Əgər konkret alət/funksiyadırsa, onun funksiyasını göstər.
+              BUNLARI İSTİFADƏ ETMƏ (klişedir, HEÇ BİR mövzu üçün işlətmə): robot
+              insanla əl sıxışır, dövrə lövhəsindən/işıqlanan beyin, neyron şəbəkəsi
+              kürəsi, futuristik hologram, monitor/kamera divarı və izləmə xətləri
+              (YALNIZ mövzu HƏQİQƏTƏN kamera/video izləmə ilə bağlıdırsa istifadə et,
+              başqa heç bir mövzu üçün YOX). Professional, minimal, flat-design,
+              real loqo/brend adı olmadan.>
 POST_TEXT_START
 <Azərbaycan dilində, MƏQALƏ TƏRZİNDƏ LinkedIn postu, TAM 180-250 söz (bundan
 AZ OLMASIN - qısa yazma). Bu quruluşu izlə:
 (1) Diqqətçəkən ilk sətir - xəbərdəki KONKRET bir fakt, rəqəm və ya addan başla, ümumi giriş cümləsi yazma
 (2) 3-4 cümlə - nə oldu, kim/nə edib, mənbədən ən azı 2 konkret detal istifadə et
-(3) 3-4 cümlə - MƏHZ Product Owner/Product Manager auditoriyası üçün bunun praktiki mənası: hansı qərara, prioritetə, riskə və ya imkana təsir edir - ümumi "AI gələcəyi dəyişəcək" tipli cümlə YOX, konkret iş nəticəsi
+(3) 3-4 cümlə - Bu xəbərin Product Owner/Product Manager üçün KONKRET nəticəsini
+    YAZ - SUAL VERMƏ, İDDİA ET. Format nümunəsi (mövzu fərqli olacaq, bu YALNIZ
+    struktur nümunəsidir, sözbəsöz köçürmə): "Bu, [konkret komanda/məhsul növü]
+    üçün deməkdir ki, [konkret dəyişiklik] baş verə bilər, çünki [səbəb]." Sən bu
+    xəbərə uyğun, öz KONKRET versiyanı yaz - "necə təsir edəcək?" kimi sual YAZMA,
+    CAVABI ÖZÜN VER.
 (4) 1-2 cümlə - yuxarıdaki PERSONA-nın şəxsi mövqeyi/təcrübəsi
-(5) Oxucuya yönəlmiş açıq, düşündürücü sual
+(5) Oxucuya yönəlmiş açıq, düşündürücü sual (SUAL YALNIZ BURADA olsun, (3)-də yox)
 (6) 3-5 aidiyyəti hashtag
 Yuxarıdaki "Writing style" bölməsindəki ton, emoji və format qaydalarına əməl et.>
 POST_TEXT_END"""
+    
+
+    
 
     response = None
     last_error = None
