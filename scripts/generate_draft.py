@@ -69,6 +69,17 @@ HN_KEYWORDS = [
 ]
 HN_MIN_SCORE = 40  # aşağı upvote-lu, hələ sınanmamış elanları süzgəcdən keçirir - "product" geniş açar söz olduğu üçün bu, ikinci müdafiə xətti kimi qalır
 
+# Bəzi mənbələr Product Owner peşəsi üçün İNTRİNSİK aiddir (Mind the Product,
+# SVPG), digərləri isə ümumi AI/texnologiya xəbəridir. Bu etiket seçim
+# mərhələsində modelin mənbəyə görə çəki verə bilməsi üçündür.
+RSS_FEED_CATEGORIES = {
+    "https://feeds.feedburner.com/MindTheProduct": "MƏHSUL İDARƏETMƏSİ",
+    "https://www.svpg.com/feed/": "MƏHSUL İDARƏETMƏSİ",
+    "https://martinfowler.com/feed.atom": "Mühəndislik təcrübəsi",
+    "https://www.producthunt.com/feed": "Yeni məhsul elanı",
+}
+DEFAULT_FEED_CATEGORY = "Ümumi AI/texnologiya xəbəri"
+
 PERSONA = """You are an experienced Product Owner specializing in AI-powered products.
 
 Your audience:
@@ -143,6 +154,7 @@ def collect_articles():
                     "title": entry.get("title", ""),
                     "url": entry.get("link", ""),
                     "summary": re.sub("<[^<]+?>", "", entry.get("summary", ""))[:600],
+                    "category": RSS_FEED_CATEGORIES.get(url, DEFAULT_FEED_CATEGORY),
                 })
         except Exception as e:
             print(f"RSS xətası ({url}): {e}")
@@ -167,6 +179,7 @@ def collect_articles():
                     "title": item["title"],
                     "url": item.get("url", f"https://news.ycombinator.com/item?id={item_id}"),
                     "summary": "",
+                    "category": "Hacker News müzakirəsi",
                 })
     except Exception as e:
         print(f"Hacker News xətası: {e}")
@@ -187,7 +200,7 @@ def choose_and_write(articles):
     Marker-based format bu problemi tamamilə aradan qaldırır.
     """
     articles_text = "\n\n".join(
-        f"[{i}] {a['title']}\n{a['url']}\n{a['summary']}" for i, a in enumerate(articles)
+        f"[{i}] ({a['category']}) {a['title']}\n{a['url']}\n{a['summary']}" for i, a in enumerate(articles)
     )
 
     prompt = f"""{PERSONA}
@@ -200,12 +213,21 @@ Yalnız IMAGE_CONCEPT və IMAGE_PROMPT ingiliscə olsun.
 
 Aşağıda son {ARTICLE_LOOKBACK_HOURS} saatın texnologiya xəbərləri var (nömrələnmiş).
 
-SEÇİM MEYARI: Yalnız BİRİNİ seç. Kiçik, tək bir alətin sadə "işə salındı" elanını
-və ya məzmunca kasıb, dərinliyi olmayan xəbərləri SEÇMƏ. Sadəcə "hansı şirkətin
-modeli daha güclüdür/böyükdür" müqayisəsi olan, konkret biznes nəticəsi olmayan
-xəbərləri də ÖNCƏLİKLƏNDİRMƏ - bunlar Product Owner üçün əməli dəyər vermir.
-Əvəzinə, məhsul qərarına, iş prosesinə, qiymətləndirməyə, istifadəçi
-təcrübəsinə və ya komanda prioritetlərinə BİLAVASİTƏ təsir edən bir xəbər seç.
+SEÇİM MEYARI: Yalnız BİRİNİ seç. ƏVVƏLLİKLƏ "MƏHSUL İDARƏETMƏSİ" etiketli
+mənbələrdən uyğun bir xəbər seçməyə çalış - bunlar məhz Product Owner peşəsi
+üçün yazılıb, intrinsik aiddir. Belə xəbər yoxdursa, digər mənbələrdən YALNIZ
+məhsul strategiyasına, qiymətləndirməyə, istifadəçi təcrübəsinə, prompt
+mühəndisliyi texnikasına və ya komanda prosesinə BİRBAŞA aid olanı seç.
+
+RƏDD ET: bir şirkətin maliyyələşməsi, "stealth rejimindən çıxışı", yeni
+məhsulunun sadəcə elanı, "hansı model daha güclüdür" müqayisəsi, kiçik bir
+alətin "işə salındı" xəbəri - bunlar ÖZLƏRİ məhsul strategiyası/prosesi
+müzakirə etmirsə, RƏDD ET, hətta AI ilə bağlı olsa və nə qədər "böyük" xəbər
+sayılsa belə.
+
+Sınaq sualı: "Bu xəbərin ÖZÜ artıq Product Owner təcrübəsi/qərarı haqqında
+danışır, YOXSA mən sonradan zorla bir PO cümləsi ƏLAVƏ ETMƏLİYƏM?" Cavab
+ikincidirsə, SEÇMƏ, başqa namizəd axtar.
 
 Xəbərlər:
 {articles_text}
@@ -254,9 +276,6 @@ konkret məlumat və ya iddia əlavə etməlidir. Bu quruluşu izlə:
 (6) 3-5 aidiyyəti hashtag
 Yuxarıdaki "Writing style" bölməsindəki ton, emoji və format qaydalarına əməl et.>
 POST_TEXT_END"""
-    
-
-    
 
     response = None
     last_error = None
@@ -297,6 +316,11 @@ POST_TEXT_END"""
         if post_text:
             print("QEYD: POST_TEXT_END markeri tapılmadı, START-dan sona qədər olan mətn istifadə olundu.")
 
+    if not post_text:
+        # Model formatı tam izləməyibsə, tam cavabı göstər ki, log-dan görüb
+        # promptu bir də tənzimləyə bilək - kor-koranə davam etmirik.
+        raise ValueError(f"Modelin cavabı gözlənilən formatda deyil:\n{raw[:1500]}")
+
     return {
         "chosen_index": chosen_index,
         "reason": reason,
@@ -332,6 +356,8 @@ def generate_image(image_prompt, out_path, max_retries=3):
                 with open(out_path, "wb") as f:
                     f.write(img_bytes)
                 return
+            # Uğursuz olsa, NVIDIA-nın öz cavabını çap et - bu, tam traceback-dən
+            # daha faydalıdır, çünki dəqiq nəyin səhv olduğunu göstərir.
             print(f"NVIDIA şəkil API cavabı (cəhd {attempt}/{max_retries}, {resp.status_code}): {resp.text[:400]}")
             last_error = requests.exceptions.HTTPError(f"{resp.status_code} Server Error", response=resp)
         except requests.exceptions.RequestException as e:
