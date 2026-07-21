@@ -1,0 +1,12 @@
+{
+  "chosen_index": 22,
+  "reason": "Məhsul idarəçiliyi və texniki təcrübə ilə bağlıdır.",
+  "post_text": "Birgitta Böckeler, Martin Fowler-ın saytında dərc etdirdiyi \"The Archaeologist’s Copilot\" məqaləsində, keçmiş dövrə kodlarının modernləşdirilməsində LLM-lərin (Large Language Models) necə istifadə edildiyini izah edir. Məqalədə, Nik Malykhin-in Java 1.5 kod bazasını müasir donanada işlətmək üçün etdiyi işlər haqqında bəhs edilir. LLM-lərin erkən istifadəsi plauzibl cavablar verdi, lakin kod bazasında sınaqdan keçmədi. İlerici nəticələr yalnız LLM-lərin faktlar ilə əsaslandırılması və Docker mühitində sınaqdan keçirilməsi nəticəsində əldə edildi.\n\nBu xəbər, Product Owner və Product Manager-lər üçün vacibdir, çünki onlar məhsul strategiyasını və texniki tərəqqini müəyyən edərkən, legacy kodlarla işləmək və LLM-lərdən istifadə etmək kimi amilləri nəzərə almalıdırlar. Beləliklə, onlar məhsulun daha yaxşı və etibarlı olmasını təmin edə bilərlər.\n\nMənəvi təcrübəmə görə, LLM-lərin legacy kod modernizasiyasında effektiv istifadəsi üçün, onların faktlar ilə əsaslandırılması və sınaqdan keçirilməsi lazımdır. Bu, məhsulun keyfiyyətini və etibarlılığını yüksəltməyə kömək edir.\n\nSizcə, LLM-lərin legacy kod modernizasiyasında necə istifadə edilməsi daha effektiv olardı? \n#LLM #LegacyCode #Modernization #ProductOwner #ProductManager #SoftwareDevelopment",
+  "image_prompt": "a robot and a human shaking hands in front of a large screen displaying java code",
+  "source": {
+    "title": "The Archaeologist’s Copilot",
+    "url": "https://martinfowler.com/articles/archaeologist-copilot.html",
+    "summary": "\n\nWhen people think of legacy modernization, most folks aren't imagining\n      the target environment will be Java 8. But this was the challenge facing\n      Nik Malykhin when he needed to run a Java 1.5 codebase on\n      today's hardware. His early use of LLMs gave plausible answers that did\n      not hold up in the codebase. Progress came when he grounded the process in\n      evidence, using AI to support analysis, validation in a stable Docker\n      environment, and gradual refactoring protected by tests. The main takeaway\n      is practical: AI was most useful when constrained by evidence,",
+    "category": "Mühəndislik təcrübəsi"
+  }
+}
