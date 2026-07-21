@@ -1,0 +1,11 @@
+{
+  "chosen_index": 5,
+  "reason": "Bu xəbər Çin şirkətlərinin Amerika şirkətləri ilə rəqabətə girəcəyi güclü AI modelləri hazırlamağı barədə məlumat verən maraqlı və məzmunlu xəbərdir.",
+  "post_text": "2,4 trillon parametrə malik olan Qwen3.8-Max modeli, Moonshot şirkətinin Kimi K3 modeli ilə yanaşı mövcuddur. Alibaba şirkəti tərəfindən hazırlanan bu model, ikinci nəsil AI modelləri arasında \"ikinci ən yaxşı\" hesab olunur. Bu modelin hazırlanması, Çin şirkətlərinin Amerika şirkətləri ilə rəqabətə girəcəyi güclü AI modelləri hazırlamaq imkanlarını artırır.\n\nQwen3.8-Max modeli, multimodal MoE modeli olaraq hazırlanmış və 10% standart qiymətindən Token Plan, Qoder və QoderWork platformalarında mövcuddur. Lakin, modelinbenchmark cədvəli, lisenziyası, per-token qiyməti və aktiv parametr sayı haqqında məlumatlar hələ də yayımlanmamışdır.\n\nBu xəbər, AI sahəsində Çin şirkətlərinin inkişaf etdiyini və Amerika şirkətləri ilə rəqabətə girəcəyi güclü AI modelləri hazırlamaq imkanlarına malik olduqlarını göstərir. Bu, AI sahəsindəki rəqabətin güclənməsinə və yeni texnologiyaların inkişafına səbəb olacaq.\n\nMən, Product Owner olaraq, bu xəbərin praktiki mənasını anlamğa çalışıram. Bu, bizim işimizə necə təsir edəcək? Bizim prioritetlərimiz necə dəyişəcək? Bizim risklərimiz necə azalmış olacaq?\n\nSizcə, AI sahəsindəki bu inkişafın bizim işimizə necə təsir edəcək?\n#AI #MachineLearning #China #USA #Innovation #Technology #ArtificialIntelligence #Qwen3.8Max #KimiK3",
+  "image_prompt": "a grid of small monitor screens showing different camera angles connected by glowing lines to a central dashboard",
+  "source": {
+    "title": "China delivers a one-two punch to America’s AI dominance",
+    "url": "https://www.theverge.com/ai-artificial-intelligence/967781/chinese-ai-models-open-source-moonshot-kimi-k3-alibaba-qwen",
+    "summary": "China's leading AI companies are ramping up the pressure on Silicon Valley, as Moonshot and Alibaba unveiled models they claim can go toe-to-toe with the best from OpenAI and Anthropic at a fraction of the cost. The rapid-fire releases suggest America's lead at the AI frontier is increasingly tight, just as the technology is becoming [&#8230;]"
+  }
+}
