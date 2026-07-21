@@ -35,6 +35,9 @@ RSS_FEEDS = [
     "https://feeds.feedburner.com/MindTheProduct",
     "https://www.svpg.com/feed/",
     "https://martinfowler.com/feed.atom",
+    "https://www.lennysnewsletter.com/feed",
+    "https://www.producttalk.org/feed/",
+    "https://medium.com/feed/product-coalition",
 
     # AI Research
     "https://huggingface.co/blog/feed.xml",
@@ -70,11 +73,15 @@ HN_KEYWORDS = [
 HN_MIN_SCORE = 40  # aşağı upvote-lu, hələ sınanmamış elanları süzgəcdən keçirir - "product" geniş açar söz olduğu üçün bu, ikinci müdafiə xətti kimi qalır
 
 # Bəzi mənbələr Product Owner peşəsi üçün İNTRİNSİK aiddir (Mind the Product,
-# SVPG), digərləri isə ümumi AI/texnologiya xəbəridir. Bu etiket seçim
-# mərhələsində modelin mənbəyə görə çəki verə bilməsi üçündür.
+# SVPG, Lenny's, Product Talk, Product Coalition), digərləri isə ümumi
+# AI/texnologiya xəbəridir. Bu etiket seçim mərhələsində modelin mənbəyə görə
+# çəki verə bilməsi üçündür.
 RSS_FEED_CATEGORIES = {
     "https://feeds.feedburner.com/MindTheProduct": "MƏHSUL İDARƏETMƏSİ",
     "https://www.svpg.com/feed/": "MƏHSUL İDARƏETMƏSİ",
+    "https://www.lennysnewsletter.com/feed": "MƏHSUL İDARƏETMƏSİ",
+    "https://www.producttalk.org/feed/": "MƏHSUL İDARƏETMƏSİ",
+    "https://medium.com/feed/product-coalition": "MƏHSUL İDARƏETMƏSİ",
     "https://martinfowler.com/feed.atom": "Mühəndislik təcrübəsi",
     "https://www.producthunt.com/feed": "Yeni məhsul elanı",
 }
@@ -189,15 +196,7 @@ def collect_articles():
 
 def choose_and_write(articles):
     """NVIDIA NIM-ə göndərib ən məntiqli xəbəri seçdirir və postu yazdırır.
-
-    Diqqət 1: model yalnız BURADA verilən (real, çəkilmiş) xəbərlər üzərində
-    işləyir - "bu gün nə oldu" deyə öz yaddaşından uydurmasının qarşısı
-    məhz belə alınır.
-
-    Diqqət 2: JSON YOX, açar-sözlü mətn markerləri istifadə olunur. Uzun,
-    çoxparaqraflı post mətnini JSON string-i için-də istəsək, kiçik modellər
-    tez-tez sətir sonu simvollarını düzgün "escape" etmir və JSON sınır.
-    Marker-based format bu problemi tamamilə aradan qaldırır.
+    Uyğun namizəd yoxdursa None qaytarır - main() bu halı zərərsiz keçir.
     """
     articles_text = "\n\n".join(
         f"[{i}] ({a['category']}) {a['title']}\n{a['url']}\n{a['summary']}" for i, a in enumerate(articles)
@@ -229,13 +228,18 @@ Sınaq sualı: "Bu xəbərin ÖZÜ artıq Product Owner təcrübəsi/qərarı ha
 danışır, YOXSA mən sonradan zorla bir PO cümləsi ƏLAVƏ ETMƏLİYƏM?" Cavab
 ikincidirsə, SEÇMƏ, başqa namizəd axtar.
 
+ƏGƏR XƏBƏRLƏRİN HEÇ BİRİ bu meyarlara cavab vermirsə, zorla seçim ETMƏ.
+Bu, PİS NƏTİCƏ DEYİL - süni, zorla calanmış əlaqə yaratmaqdan qat-qat
+yaxşıdır. Belə halda YALNIZ bunu yaz, başqa heç nə yazma:
+CHOSEN_INDEX: NONE
+
 Xəbərlər:
 {articles_text}
 
 Cavabını DƏQİQ aşağıdakı formatda ver - başqa heç nə əlavə etmə, izah yazma,
 markdown qalın (**) işarəsi və kod bloku (```) işarəsi qoyma:
 
-CHOSEN_INDEX: <seçdiyin xəbərin nömrəsi>
+CHOSEN_INDEX: <seçdiyin xəbərin nömrəsi, YA DA heç biri uyğun deyilsə "NONE">
 REASON: <niyə seçdiyini bir cümlə ilə izah et, Azərbaycan dilində>
 IMAGE_CONCEPT: <bir neçə sözlə (ingiliscə), bu KONKRET xəbərin əsas texniki/işgüzar
                 konsepsiyası - xəbərin adından/mətnindən BİLAVASİTƏ çıxmalıdır
@@ -305,20 +309,20 @@ POST_TEXT_END"""
         m = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
         return m.group(1).strip() if m else default
 
-    chosen_index = int(extract_line(r"CHOSEN_INDEX:\**\s*(\d+)", raw, "0"))
+    chosen_raw = extract_line(r"CHOSEN_INDEX:\**\s*(\S+)", raw, "NONE")
+    if chosen_raw.strip().upper() == "NONE" or not chosen_raw.strip().isdigit():
+        print(f"Model bu gün üçün intrinsik uyğun bir PO xəbəri tapmadı (CHOSEN_INDEX: {chosen_raw}) - draft yaradılmır.")
+        return None
+    chosen_index = int(chosen_raw)
     reason = extract_line(r"REASON:\**\s*(.+)", raw)
     image_prompt = extract_line(r"IMAGE_PROMPT:\**\s*(.+)", raw)
     post_text = extract_block(r"POST_TEXT_START\**\s*(.*?)\s*\**POST_TEXT_END", raw)
     if not post_text:
-        # POST_TEXT_END markeri yoxdursa (məs. cavab kəsilibsə), ehtiyat olaraq
-        # START-dan mətnin sonuna qədər olan hissəni götürürük - çökmək əvəzinə.
         post_text = extract_block(r"POST_TEXT_START\**\s*(.*)", raw)
         if post_text:
             print("QEYD: POST_TEXT_END markeri tapılmadı, START-dan sona qədər olan mətn istifadə olundu.")
 
     if not post_text:
-        # Model formatı tam izləməyibsə, tam cavabı göstər ki, log-dan görüb
-        # promptu bir də tənzimləyə bilək - kor-koranə davam etmirik.
         raise ValueError(f"Modelin cavabı gözlənilən formatda deyil:\n{raw[:1500]}")
 
     return {
@@ -356,8 +360,6 @@ def generate_image(image_prompt, out_path, max_retries=3):
                 with open(out_path, "wb") as f:
                     f.write(img_bytes)
                 return
-            # Uğursuz olsa, NVIDIA-nın öz cavabını çap et - bu, tam traceback-dən
-            # daha faydalıdır, çünki dəqiq nəyin səhv olduğunu göstərir.
             print(f"NVIDIA şəkil API cavabı (cəhd {attempt}/{max_retries}, {resp.status_code}): {resp.text[:400]}")
             last_error = requests.exceptions.HTTPError(f"{resp.status_code} Server Error", response=resp)
         except requests.exceptions.RequestException as e:
@@ -392,9 +394,6 @@ Bəyənməsən, sadəcə issue-nu bağla, heç nə paylaşılmayacaq."""
 
 def main():
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    # Hər run-a unikal ID veririk (tarix + GitHub run ID). Bu, eyni gündə
-    # bir neçə dəfə test edərkən köhnə issue-ların faylının üzərinə yazılıb
-    # şəkil/mətnin qarışmasının qarşısını alır.
     run_id = os.environ.get("GITHUB_RUN_ID", "local")
     draft_id = f"{today}_{run_id}"
     os.makedirs("pending", exist_ok=True)
@@ -405,6 +404,9 @@ def main():
         return
 
     draft = choose_and_write(articles)
+    if draft is None:
+        print("Bu gün üçün draft yaradılmadı - sabah yenidən cəhd ediləcək.")
+        return
 
     image_path = f"pending/{draft_id}.png"
     generate_image(draft["image_prompt"], image_path)
