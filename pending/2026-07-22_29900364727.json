@@ -1,0 +1,12 @@
+{
+  "chosen_index": 28,
+  "reason": "Bu xəbər məhsul idarəçiliyi və mühəndislik təcrübəsi ilə bağlıdır.",
+  "post_text": "Martin Fowler-un \"Fragments\" bloqunda yazdığı son yazıda, o, \"The Future of Software Development Retreat\" toplantısında alınan 5 başlıca nəticəni paylaşdı. Bu nəticələrə əsasən, kod generasiyası artıq əngəl deyil, əsas problem verificationdir. Harness mühəndisliyi isə ayrı bir sahə kimi formalaşmaqdadır. Təşkilatlar həmçinin real apprentislik böhranına və icraçı/mühəndis arasında yaranan gözlənti fərqi riski ilə qarşı-qarşıya gəlməkdədirlər. \nBu nəticələr, məhsul idarəçiləri və mühəndislər üçün vacib nəticələrdir, çünki onlar məhsul inkişafı və təhlükəsizliyi strategiyasını yenidən qiymətləndirməli olarlar. Məsələn, kod generasiyası və verification proseslərinin inteqrasiyası, daha effektiv və etibarlı məhsul yaradılması üçün əhəmiyyət kəsb edə bilər. \nMənəvi mövqeyimdən danışdıqda, bu nəticələr məni bir az fikirləşdirir. Necə təsir edəcək ki, biz məhsul inkişafı proseslərində daha çox avtomatlaşdırma və inteqrasiyaya meyl edək? \n#Məhsulİdarəçilik #MühəndislikTəcrübəsi #Avtomatlaşdırma #Təhlükəsizlik #KodGenerasiyası",
+  "image_prompt": "A simple pipeline with blocks of different sizes and colors, representing code generation and verification stages.",
+  "source": {
+    "title": "Fragments: July 21",
+    "url": "https://martinfowler.com/fragments/2026-07-21.html",
+    "summary": "With this post, I’ll wrap up my notes from  the second Future of Software Development Retreat. But before I do, I should note that the full Thoughtworks report on the retreat is now available. They have five headline findings:\n\n\n  \n    Code generation is no longer the bottleneck — verification is.\n    ‘Harness engineering’ is emerging as a distinct, ownable discipline.\n    Organizations are colliding with a real apprenticeship crisis.\n    The executive/engineer expectation gap is a bigger risk than any technical\nlimitation.\n    Legacy modernization is the clearest, most defensible near-term va",
+    "category": "Mühəndislik təcrübəsi"
+  }
+}
