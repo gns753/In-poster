@@ -1,0 +1,12 @@
+{
+  "chosen_index": 23,
+  "reason": "Bu xəbər Domain-Specific Languages (DSL) və Large Language Models (LLM) arasında əlaqəni müzakirə edir və Product Owner üçün praktik takeaways təqdim edir.",
+  "post_text": "Birgitta Böckeler hesabat kodu generasiyasında local LLM-lərin sınaqdan keçirilməsini müzakirə edir. O, iki standart vəzifə üçün lokal LLM-lərin müqayisəsini aparır və ən perspektivli modeli gündəlik istifadə üçün yoxlayır. \n\nHarness Engineering sahəsindəki bir sessiyada, kontekst idarə olunması müzakirə edilir. LLM-lər kontekst pəncərələrinin ölçüsünü artırır, lakin bu, modellərin doğru konteksti əhatə etməsini təmin etmir. \n\nDSL-lər LLM-lərə qəti sərhədlər qoyur, onları istiqamətləndirir və nəticələrin dəqiqliyini təmin edir. Bu, Product Owner-lərə və Product Manager-lərə üçün vacibdir, çünki onlar məhsul strategiyasını və istifadəçi təcrübəsini müəyyən edirlər. \n\nBu xəbər, Product Owner-lərə üçün deməkdir ki, onlar LLM-lərdən istifadə edərkən DSL-lərdən istifadə etməlidirlər, çünki bu, məhsulun keyfiyyətini və etibarlılığını təmin edə bilər. Necə təsir edəcək ki, bu DSL-lər məhsul strategiyasını necə dəyişdirəcək? \n\n#ProductManagement #AI #LLM #DSL #ProductOwner #SoftwareDevelopment\n#ArtificialIntelligence #MachineLearning #DomainSpecificLanguages \n#LargeLanguageModels #SoftwareEngineering #Technology",
+  "image_prompt": "A simple, colorful flowchart with blocks and arrows, representing a DSL guiding an LLM.",
+  "source": {
+    "title": "DSLs Enable Reliable Use of LLMs",
+    "url": "https://martinfowler.com/articles/llm-and-dsls.html",
+    "summary": " LLMs generate code incredibly fast, but to ensure they generate\n      exactly what is intended, they need clear boundaries. Abstractions and\n      Domain-Specific Languages (DSLs) provide a strong harness that guides LLMs\n      right from the start. Unmesh Joshi describes how the example\n      of Tickloom - a domain model and DSL for illustrating distributed system\n      behavior - shows how we can use an LLM as a partner to iteratively build a\n      DSL and as a natural language interface to use it. Such a DSL can act as\n      the key source of truth for software systems in the world of LLMs",
+    "category": "Mühəndislik təcrübəsi"
+  }
+}
