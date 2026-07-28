@@ -1,20 +1,21 @@
-<!-- DRAFT_ID: 2026-07-27_30249597770 -->
-## Təklif olunan LinkedIn postu (2026-07-27_30249597770)
+<!-- DRAFT_ID: 2026-07-28_30338765563 -->
+## Təklif olunan LinkedIn postu (2026-07-28_30338765563)
 
-**Mənbə:** [Anthropic’s first technical PM on token maxing, the jagged edge, and living in the future | Dianne Penn](https://www.lennysnewsletter.com/p/anthropics-first-technical-pm-on)
-**Niyə seçildi:** Bu xəbər Anthropic şirkətinin ilk texniki məhsul meneceri Dianne Penn-in müsahibəsindən bəhs edir və məhsul idarəetməsi üçün vacib məlumatlar verir.
-
----
-
-Anthropic şirkətinin ilk texniki məhsul meneceri Dianne Penn-in müsahibəsindən məlum olur ki, şirkət Claude adlanan məhsulunu inkişaf etdirmək üçün bir neçə strategiya işlətmişdir. Bu strategiyalar arasında kodun yenidən yazılması, qiymətləndirməyə əsaslanan inkişaf dövrü və məhsulun gələcəyi barədə qərarlar vermək olmuşdur. 
-Bu xəbər Product Owner və Product Manager-lər üçün əhəmiyyətli məlumatlar verir, çünki onlar məhsul inkişafı strategiyasını hazırlayarkən eyni yanaşmağı istifadə edə bilərlər. Məsələn, onlar məhsulun kodunu yenidən yazmaq qərarına gələ bilərlər, yaxud da qiymətləndirməyə əsaslanan inkişaf dövrü keçirə bilərlər. 
-Anthropic-in müsahibəsi həmçinin məhsul idarəetməsi sahəsində təcrübə və bilik üçün dəyərli mənbədir. Dianne Penn-in təcrübəsi və bilikləri məhsul menecerlərə kömək edə bilər ki, onlar öz məhsullarını daha effektiv şəkildə inkişaf etdirmək və idarə etmək üçün strategiyalar işlətsinlər. 
-Sual verilə bilər: Necə olar ki, məhsul idarəetməsi strategiyalarını işlətmək məhsulun uğurlu inkişafına təsir edə bilər?
-#ProductManagement #Məhsulİdarəetmə #Anthropic #TexnikiMəhsulMeneceri #Məhsulİnkişafı
+**Mənbə:** [Satya Nadella says companies that trust one AI for everything may not survive](https://techcrunch.com/2026/07/27/satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive/)
+**Niyə seçildi:** Bu xəbər Anthropic şirkətinin qurucusu və CEO-su Dario Amodei-nin açıqlamaları haqqında məlumat verərək, açıq çəki modellərə və Çin’in artan AI qabiliyyətləri barədə fikirlərini bölüşür.
 
 ---
 
-![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-27_30249597770.png)
+Satya Nadella-nin dediyinə görə, yalnız bir AI-ya güvənən şirkətlər sağ qala bilməyəcək. Bu, AI strategiyasının vacib bir hissəsi olaraq, şirkətlərin öz AI modellərini və ya AI gateway-lərini inkişaf etdirməsi lazım olduğunu göstərir. 
+Anthropic şirkətinin qurucusu və CEO-su Dario Amodei açıq şəkildə açıqlayıb ki, o, açıq çəki modellərinə qarşı deyil, Çin’in artan AI qabiliyyətlərindən narahatdır. 
+Bu xəbər Product Owner-lər üçün vacibdir, çünki onlar AI strategiyasını və AI təhlükəsizliyini təmin etməlidirlər. 
+Onlar AI modellərinin seçilməsində və təhlükəsizliyinin təmin edilməsində aktiv rol oynayırlar. 
+Sual verilən sual: AI təhlükəsizliyini təmin etmək üçün nələr etmək lazımdır?
+#AI #Təhlükəsizlik #ProductOwner #AIStrategy #Tech
+
+---
+
+![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-28_30338765563.png)
 
 ---
 Bəyənirsənsə, bu issue-ya **`approved`** etiketini əlavə et - avtomatik LinkedIn-də paylaşılacaq.
