@@ -1,0 +1,12 @@
+{
+  "chosen_index": 9,
+  "reason": "Bu xəbər Product Owner və Product Manager üçün vacibdir, çünki Satya Nadella şirkətlərin AI strategiyasına toxunur.",
+  "post_text": "Satya Nadella, Microsoftun CEO-su, şirkətlərin tək bir AI sistemi üzərində tam nəzarətə malik olmalarının önəmli olduğunu bildirdi. Beləliklə, şirkətlərə AI strategiyalarını yenidən nəzərdən keçirmək və AI gatewaylərindən istifadə etmək tövsiyə olunur. \nBu, Product Owner və Product Manager üçün vacibdir, çünki onlar şirkətlərin məhsul strategiyasını və AI istifadəsini müəyyən edir. Onlar AI sistemlərinin təhlükəsizliyini və etibarlılığını təmin etməlidirlər, əks halda, şirkətə ciddi təhlükələr yarana bilər. \nAI gatewaylərinin istifadəsi, şirkətlərə AI sistemlərinin daha yaxşı idarə olunmasını və nəzarətə alınmasını təmin edə bilər. Bu, şirkətlərə daha effektiv və təhlükəsiz AI strategiyaları inkişaf etdirməyə kömək edə bilər. \nSual verilir: AI strategiyasnızı necə yenidən nəzərdən keçirə və AI gatewaylərindən istifadə edə bilərsiniz?\n#AI #ProductManagement #Innovation #Technology #Microsoft",
+  "image_prompt": "A large, abstract gateway with multiple entrances and exits, symbolizing the flow of data and AI decision-making.",
+  "source": {
+    "title": "Satya Nadella says companies that trust one AI for everything may not survive",
+    "url": "https://techcrunch.com/2026/07/27/satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive/",
+    "summary": "Companies without their own models — or without a layer of AI infrastructure known as AI gateways to separate their prompts from the model itself — will be in trouble, Nadella says.",
+    "category": "Ümumi AI/texnologiya xəbəri"
+  }
+}

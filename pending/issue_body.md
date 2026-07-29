@@ -1,21 +1,20 @@
-<!-- DRAFT_ID: 2026-07-28_30338765563 -->
-## Təklif olunan LinkedIn postu (2026-07-28_30338765563)
+<!-- DRAFT_ID: 2026-07-29_30432330859 -->
+## Təklif olunan LinkedIn postu (2026-07-29_30432330859)
 
 **Mənbə:** [Satya Nadella says companies that trust one AI for everything may not survive](https://techcrunch.com/2026/07/27/satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive/)
-**Niyə seçildi:** Bu xəbər Anthropic şirkətinin qurucusu və CEO-su Dario Amodei-nin açıqlamaları haqqında məlumat verərək, açıq çəki modellərə və Çin’in artan AI qabiliyyətləri barədə fikirlərini bölüşür.
+**Niyə seçildi:** Bu xəbər Product Owner və Product Manager üçün vacibdir, çünki Satya Nadella şirkətlərin AI strategiyasına toxunur.
 
 ---
 
-Satya Nadella-nin dediyinə görə, yalnız bir AI-ya güvənən şirkətlər sağ qala bilməyəcək. Bu, AI strategiyasının vacib bir hissəsi olaraq, şirkətlərin öz AI modellərini və ya AI gateway-lərini inkişaf etdirməsi lazım olduğunu göstərir. 
-Anthropic şirkətinin qurucusu və CEO-su Dario Amodei açıq şəkildə açıqlayıb ki, o, açıq çəki modellərinə qarşı deyil, Çin’in artan AI qabiliyyətlərindən narahatdır. 
-Bu xəbər Product Owner-lər üçün vacibdir, çünki onlar AI strategiyasını və AI təhlükəsizliyini təmin etməlidirlər. 
-Onlar AI modellərinin seçilməsində və təhlükəsizliyinin təmin edilməsində aktiv rol oynayırlar. 
-Sual verilən sual: AI təhlükəsizliyini təmin etmək üçün nələr etmək lazımdır?
-#AI #Təhlükəsizlik #ProductOwner #AIStrategy #Tech
+Satya Nadella, Microsoftun CEO-su, şirkətlərin tək bir AI sistemi üzərində tam nəzarətə malik olmalarının önəmli olduğunu bildirdi. Beləliklə, şirkətlərə AI strategiyalarını yenidən nəzərdən keçirmək və AI gatewaylərindən istifadə etmək tövsiyə olunur. 
+Bu, Product Owner və Product Manager üçün vacibdir, çünki onlar şirkətlərin məhsul strategiyasını və AI istifadəsini müəyyən edir. Onlar AI sistemlərinin təhlükəsizliyini və etibarlılığını təmin etməlidirlər, əks halda, şirkətə ciddi təhlükələr yarana bilər. 
+AI gatewaylərinin istifadəsi, şirkətlərə AI sistemlərinin daha yaxşı idarə olunmasını və nəzarətə alınmasını təmin edə bilər. Bu, şirkətlərə daha effektiv və təhlükəsiz AI strategiyaları inkişaf etdirməyə kömək edə bilər. 
+Sual verilir: AI strategiyasnızı necə yenidən nəzərdən keçirə və AI gatewaylərindən istifadə edə bilərsiniz?
+#AI #ProductManagement #Innovation #Technology #Microsoft
 
 ---
 
-![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-28_30338765563.png)
+![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-29_30432330859.png)
 
 ---
 Bəyənirsənsə, bu issue-ya **`approved`** etiketini əlavə et - avtomatik LinkedIn-də paylaşılacaq.
