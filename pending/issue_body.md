@@ -1,20 +1,20 @@
-<!-- DRAFT_ID: 2026-07-29_30432330859 -->
-## Təklif olunan LinkedIn postu (2026-07-29_30432330859)
+<!-- DRAFT_ID: 2026-07-30_30522987012 -->
+## Təklif olunan LinkedIn postu (2026-07-30_30522987012)
 
-**Mənbə:** [Satya Nadella says companies that trust one AI for everything may not survive](https://techcrunch.com/2026/07/27/satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive/)
-**Niyə seçildi:** Bu xəbər Product Owner və Product Manager üçün vacibdir, çünki Satya Nadella şirkətlərin AI strategiyasına toxunur.
-
----
-
-Satya Nadella, Microsoftun CEO-su, şirkətlərin tək bir AI sistemi üzərində tam nəzarətə malik olmalarının önəmli olduğunu bildirdi. Beləliklə, şirkətlərə AI strategiyalarını yenidən nəzərdən keçirmək və AI gatewaylərindən istifadə etmək tövsiyə olunur. 
-Bu, Product Owner və Product Manager üçün vacibdir, çünki onlar şirkətlərin məhsul strategiyasını və AI istifadəsini müəyyən edir. Onlar AI sistemlərinin təhlükəsizliyini və etibarlılığını təmin etməlidirlər, əks halda, şirkətə ciddi təhlükələr yarana bilər. 
-AI gatewaylərinin istifadəsi, şirkətlərə AI sistemlərinin daha yaxşı idarə olunmasını və nəzarətə alınmasını təmin edə bilər. Bu, şirkətlərə daha effektiv və təhlükəsiz AI strategiyaları inkişaf etdirməyə kömək edə bilər. 
-Sual verilir: AI strategiyasnızı necə yenidən nəzərdən keçirə və AI gatewaylərindən istifadə edə bilərsiniz?
-#AI #ProductManagement #Innovation #Technology #Microsoft
+**Mənbə:** [How enabling two settings tripled our scores on the ARC-AGI-3 benchmark](https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores)
+**Niyə seçildi:** Bu xəbər Microsoft-un "super app" Copilot-in buraxılma xəbəri barədədir və AI agentləri ilə əlaqəli məhsul strategiyasına toxunur.
 
 ---
 
-![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-29_30432330859.png)
+Microsoft CEO Satya Nadella-nın bu günkü məlumatına görə, şirkət "super app" Copilot-u bu il buraxacaq. Bu app AI agentləri və "cowork" funksiyalarını birləşdirəcək. Copilot-un inkişafı "chat" və "autopilot" funksiyalarından ibarət olacaq. 
+Microsoft-un bu addımı AI agentləri sahəsindəki irəliləyişinə görə atdığı addımlardan biridir. Beləliklə, AI agentləri ilə işləmək istəyən komandalar üçün bu xəbər əhəmiyyət kəsb edir. 
+Bu xəbərə görə, Product Owner-ların AI agentləri ilə işləmək üçün yeni strategiyalar hazırlamaları lazımdır. Onlar AI agentlərinin təhlükəsizliyini və etibarlılığını təmin etməlidirlər. 
+Sual: AI agentləri ilə işləmək üçün hansı yeni strategiyalar hazırlanmalıdır ki, komandalar effektiv şəkildə işləyə bilərlər?
+#AI #ProductManagement #Innovation #Technology #ArtificialIntelligence #MachineLearning #SoftwareDevelopment
+
+---
+
+![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-30_30522987012.png)
 
 ---
 Bəyənirsənsə, bu issue-ya **`approved`** etiketini əlavə et - avtomatik LinkedIn-də paylaşılacaq.
