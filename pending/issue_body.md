@@ -1,19 +1,19 @@
-<!-- DRAFT_ID: 2026-07-31_30613881986 -->
-## Təklif olunan LinkedIn postu (2026-07-31_30613881986)
+<!-- DRAFT_ID: 2026-08-01_30689632377 -->
+## Təklif olunan LinkedIn postu (2026-08-01_30689632377)
 
-**Mənbə:** [LinkedIn adds a button to report AI-generated ‘slop’](https://techcrunch.com/2026/07/30/linkedin-adds-a-button-to-report-ai-generated-slop/)
-**Niyə seçildi:** LinkedIn-in AI-yərərəcəsinə "seems like AI slop" reporting xüsusiyyəti əlavə etməsi, istifadəçi təcrübəsini və məzmun keyfiyyətini yaxşılaşdırmaq üçün bir addım hesab olunur.
-
----
-
-LinkedIn-də istifadəçilər artıq "seems like AI slop" reporting xüsusiyyətindən istifadə edə bilərlər. Bu, istifadəçi təcrübəsini və məzmun keyfiyyətini yaxşılaşdırmaq üçün bir addım hesab olunur. Beləliklə, istifadəçilər artıq AI tərəfindən yaradılan məzmunları asan şəkildə reporting edə bilərlər. Bu xüsusiyyət, xüsusilə də social media platformlarında AI tərəfindən yaradılan məzmunun artması səbəbilə, çox vacibdir. 
-Product Owner və Product Manager-lər üçün bu xəbərin nəticəsi odur ki, onlar öz məhsullarında AI-yərərəcəsinə və istifadəçi təcrübəsinə diqqət yetirməlidirlər. Onlar AI tərəfindən yaradılan məzmunun keyfiyyətini və istifadəçi təcrübəsini yaxşılaşdırmaq üçün yeni strategiyalar hazırlamalıdırlar. 
-Mənənən şəxsi mövqeyim budur ki, AI-yərərəcəsi və istifadəçi təcrübəsi arasında balans saxlamaq çox vacibdir. Əgər biz bu balansı saxlaya bilərsə, onda AI-yərərəcəsi daha effektiv şəkildə istifadə oluna bilər. 
-İstifadəçi təcrübəsini və məzmun keyfiyyətini necə yaxşılaşdırmaq olar? #AI #ProductManagement #UserExperience #ContentQuality #SocialMedia
+**Mənbə:** [LinkedIn actually adds a ‘seems like AI slop’ button](https://www.theverge.com/ai-artificial-intelligence/973384/linkedin-seems-like-ai-slop-button)
+**Niyə seçildi:** LinkedIn-ın "seems like AI slop" düyməsi ilə istifadəçilərin AI-yərli contenu barədə xəbər verməsinə imkan verən xüsusiyyəti Product Owner üçün maraqlıdır.
 
 ---
 
-![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-07-31_30613881986.png)
+LinkedIn-də istifadəçilər artıq "seems like AI slop" düyməsini basınca, AI-yərli məzmunu asan şəkildə report edə bilərlər. Bu xüsusiyyət, istifadəçilərin platformada yaxşı keyfiyyətli məzmunla təmin olunmasını təmin etməyə kömək edir. Product Owner kimi, bu xüsusiyyətin məhsul strategiyamıza necə təsir edəcəyini düşünmək maraqlıdır. Belə ki, AI-yərli məzmunu report etmək, istifadəçilərin məzmun keyfiyyətini yaxşılaşdırmağa kömək edə bilər, lakin eyni zamanda, AI-yərli məzmunun yaradılmasını da stimullaşa edə bilər. Necə təsir edəcək? 
+AI-yərli məzmunu report etmək, məhsul strategiyamızı necə dəyişdirəcək? 
+Məhsul idarəçiləri, AI-yərli məzmunu report etmək xüsusiyyətini necə istifadə edəcəklər? 
+#AISlop #ProductStrategy #LinkedIn #AI #MachineLearning #ProductOwner
+
+---
+
+![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-08-01_30689632377.png)
 
 ---
 Bəyənirsənsə, bu issue-ya **`approved`** etiketini əlavə et - avtomatik LinkedIn-də paylaşılacaq.
