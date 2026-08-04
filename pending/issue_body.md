@@ -1,21 +1,20 @@
-<!-- DRAFT_ID: 2026-08-03_30796989674 -->
-## Təklif olunan LinkedIn postu (2026-08-03_30796989674)
+<!-- DRAFT_ID: 2026-08-04_30888058239 -->
+## Təklif olunan LinkedIn postu (2026-08-04_30888058239)
 
-**Mənbə:** [This CPO regrets that product management exists | Tom Verrilli (CPO of Whatnot)](https://www.lennysnewsletter.com/p/this-cpo-regrets-that-product-management)
-**Niyə seçildi:** Bu xəbər Product Owner üçün uyğun bir məhsul strategiyası və idarəetməsini müzakirə edir.
-
----
-
-Tom Verrilli, Whatnot şirkətinin CPO-su, produktdan daha az, daha yüksək səviyyəli menecerlərin real IC işi ilə məşğul olmasının daha effektiv olduğunu bildirir. O, produktda çox sayda menecerlərin olmasına qarşı, daha az sayda, lakin daha yüksək səviyyəli menecerlərin olması lazım olduğunu qeyd edir. Bu, daha effektiv kommunikasiya və qərar qəbulu üçün əlverişli şərait yaradır.
-Bu yanaşma, produktda daha yaxşı nəticələrə gətirib çıxara bilər, çünki daha yüksək səviyyəli menecerlər daha yaxşı strategiya və planlaşdırma aparmaq qabiliyyətinə malik olurlar. 
-Beləliklə, produktda daha az, daha yüksək səviyyəli menecerlərin olması, daha effektiv və uğurlu nəticələrə gətirib çıxara bilər. 
-Product Owner kimi, bizə bu yanaşmanı nəzərə almalı və daha yaxşı nəticələr əldə etməyə çalışmalıyıq.
-Sual: Produktda daha az, daha yüksək səviyyəli menecerlərin olması daha yaxşı nəticələrə necə gətirib çıxara bilər?
-#productmanagement #productowner #management #strategy #leadership
+**Mənbə:** [🎙️ How I AI: ChatGPT Codex Voice + browser + Sites: an expert’s AI workflow | Nick Baumann (OpenAI)](https://www.lennysnewsletter.com/p/how-i-ai-chatgpt-codex-voice-browser)
+**Niyə seçildi:** Bu xəbər Product Owner üçün uyğun bir xəbərdir, çünki o, ChatGPT Codex Voice + browser + Sites: an expert’s AI workflow mövzusunda məlumat verən bir podcast haqqında danışır.
 
 ---
 
-![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-08-03_30796989674.png)
+Nick Baumann (OpenAI) "How I AI" podcast-unda ChatGPT Codex Voice + browser + Sites: an expert’s AI workflow mövzusunda danışır. Bu podcast-da Nick Baumann, AI workflow-nu necə idarə edir və ChatGPT-ni işində necə istifadə edir.
+ChatGPT Codex Voice + browser + Sites: an expert’s AI workflow, Product Owner-lər üçün olduqca maraqlı mövzudur, çünki onlar məhsul inkişafında AI-ni necə istifadə edə bilərlər. Bu podcast-da Nick Baumann, AI workflow-nu idarə edən bir expert kimi, ChatGPT-ni işində necə istifadə edir və hansı tövsiyələr verə bilər.
+Bu xəbər Product Owner-lər üçün olduqca faydalıdır, çünki onlar məhsul inkişafında AI-ni necə istifadə edə bilərlər. Onlar AI workflow-nu idarə edən bir expert kimi, ChatGPT-ni işində necə istifadə edə bilərlər və hansı tövsiyələr ala bilərlər.
+Product Owner-lər necə AI-ni işində istifadə edə bilərlər? Onlar AI workflow-nu idarə edən bir expert kimi, ChatGPT-ni necə istifadə edə bilərlər?
+#AI #ProductOwner #ChatGPT #Workflow #Expert
+
+---
+
+![draft şəkli](https://raw.githubusercontent.com/gns753/In-poster/main/pending/2026-08-04_30888058239.png)
 
 ---
 Bəyənirsənsə, bu issue-ya **`approved`** etiketini əlavə et - avtomatik LinkedIn-də paylaşılacaq.
